@@ -1,0 +1,12 @@
+.btn-danger {
+  background-color: #ff2400 ;
+}
+
+body{
+  font-family: 'Lexend', sans-serif;
+}
+
+.img{
+  height: 90vh;
+  width: 100vw;
+}
