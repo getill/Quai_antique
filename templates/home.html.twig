@@ -28,8 +28,10 @@
             </li>
           </ul>
 
+          <div>
             <button type="button" class="btn btn-outline-light me-2">S'inscrire</button>
             <button type="button" class="btn btn-danger">Connexion</button>
+          </div>
 
         </div>
         
@@ -37,13 +39,102 @@
     </nav>
 
   </header>
-  <div class="d-flex justify-content-center">
-      <img class="img object-fit-cover" src="{{ asset('assets/img/Head.jpg') }}" alt="Fondue savoyarde">
+  <div class="bg-dark text-white">
+    <div class="d-flex justify-content-center">
+        <img class="img object-fit-cover" src="{{ asset('assets/img/Head.jpg') }}" alt="Fondue savoyarde">
+    </div>
+
+
+    <div class="album py-5">
+    
+      <div class="container mb-5">
+        <h2>La sélection du chef !</h2>
+        <p>Le chef nous fait l'honneur de nous recommander ces plats du moment. <br> PS: Il ne se vexera pas si vous prenez autre chose, promis!</p>
+      </div>
+      <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm mb-5">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="container text-center">
+        <button type="button" class="btn btn-danger">Réserver</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="">
+      <h2 class="text-center">Nos menus</h2>
+    </div>
+
+    <div class="row mb-2 container">
+    <div class="">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+        <div class="col-auto d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        </div>
+          <strong class="d-inline-block mb-2 text-primary">World</strong>
+          <h3 class="mb-0">Featured post</h3>
+          <div class="mb-1 text-muted">Nov 12</div>
+          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success">Design</strong>
+          <h3 class="mb-0">Post title</h3>
+          <div class="mb-1 text-muted">Nov 11</div>
+          <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
-
-  <footer>
-  
+  <footer class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-6 col-md">
+        <h5>Plan du site</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Accueil</a></li>
+          <li><a class="link-secondary" href="#">La carte</a></li>
+          <li><a class="link-secondary" href="#">Réservation</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md text-center">
+        <h5>Quai antique</h5>
+        <p>2 rue du quai, 73000 Chambéry</p>
+        <br>
+        <p>Ouvert du mardi au Dimanche de 12h00 à 14h30 puis de 19h00 à 22h30</p>
+      </div>
+      <div class="col-6 col-md text-center">
+        <button type="button" class="btn btn-outline-dark me-2">S'inscrire</button>
+        <button type="button" class="btn btn-danger">Connexion</button>
+      </div>
+    </div>
   </footer>
         
 {% endblock %}
