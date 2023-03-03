@@ -11,3 +11,7 @@ body{
   width: 100vw;
 }
 
+.justify{
+  text-align: justify !important;
+  text-justify: auto !important;
+}
