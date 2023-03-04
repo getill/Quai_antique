@@ -3,42 +3,7 @@
 {% block title %}Quai antique - Restaurant savoyard - accueil{% endblock %}
 
 {% block body %}
-  <header class="p-3 text-bg-dark">
 
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-
-      <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#">Quai antique</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarToggler">
-
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active text-white" aria-current="page" href="#">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">La carte</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled text-white">Réservation</a>
-            </li>
-          </ul>
-
-          <div>
-            <button type="button" class="btn btn-outline-light me-2">S'inscrire</button>
-            <button type="button" class="btn btn-danger">Connexion</button>
-          </div>
-
-        </div>
-        
-      </div>
-    </nav>
-
-  </header>
   <div class="bg-dark text-white">
     <div class="d-flex justify-content-center">
         <img class="img object-fit-cover" src="{{ asset('assets/img/Head.jpg') }}" alt="Fondue savoyarde">
@@ -108,34 +73,8 @@
         </div>
       </div>
     </div>
-
-
           
   </div>
-
-  {#-------- FOOTER -----------#}
-  <footer class="container py-5 text-center">
-    <div class="row align-items-center d-flex flex-column flex-lg-row">
-      <div class="col-6 col-md">
-        <h5>Plan du site</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Accueil</a></li>
-          <li><a class="link-secondary" href="#">La carte</a></li>
-          <li><a class="link-secondary" href="#">Réservation</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md text-center">
-        <h5>Quai antique</h5>
-        <p>2 rue du quai, 73000 Chambéry</p>
-        <br>
-        <p>Ouvert du mardi au Dimanche de 12h00 à 14h30 puis de 19h00 à 22h30</p>
-      </div>
-      <div class="col-6 col-md text-center">
-        <button type="button" class="btn btn-outline-dark me-lg-2 mb-3 mb-lg-0">S'inscrire</button>
-        <button type="button" class="btn btn-danger">Connexion</button>
-      </div>
-    </div>
-  </footer>
         
 {% endblock %}
 
