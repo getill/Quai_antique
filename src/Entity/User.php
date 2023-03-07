@@ -4,10 +4,16 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
+// Make the email unique so we can't get two users with the same email
+#[UniqueEntity('email')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -15,38 +21,36 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotNull]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotNull]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $second_name = null;
 
-    #[ORM\Column(length: 50)]
-    #[Assert\NotNull]
-    #[Assert\NotBlank]
-    #[Assert\Email]
+    #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Length(min: 2, max: 50)]
+    #[Assert\NotBlank()]
+    #[Assert\Email()]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotNull]
-    #[Assert\NotBlank]
-    #[Assert\Regex(
-        pattern: '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'
-    )]
+    private ?string $plainPassword = null;
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?string $password = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\Length(
-        min: 1,
-        max: 20,
-    )]
     private ?int $people_pref = null;
 
     #[ORM\Column]
-    private ?bool $is_admin = null;
+    #[Assert\NotNull()]
+    private array $roles = [];
 
     public function getId(): ?int
     {
@@ -89,7 +93,32 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -99,6 +128,17 @@ class User
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
     public function getPeoplePref(): ?int
@@ -113,15 +153,19 @@ class User
         return $this;
     }
 
-    public function isIsAdmin(): ?bool
+    public function setRoles(array $roles): self
     {
-        return $this->is_admin;
-    }
-
-    public function setIsAdmin(bool $is_admin): self
-    {
-        $this->is_admin = $is_admin;
+        $this->roles = $roles;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

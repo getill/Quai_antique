@@ -29,7 +29,6 @@ class AppFixtures extends Fixture
             $user->setEmail($this->faker->email());
             $user->setPassword('E#NpeQm&5h9#PeL3');
             $user->setPeoplePref($this->faker->randomDigitNot(0));
-            $user->setIsAdmin(false);
 
             $manager->persist($user);
         }
