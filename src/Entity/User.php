@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 // Make the email unique so we can't get two users with the same email
 #[UniqueEntity('email')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\EntityListeners(['App\EntityListener\UserListener'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
