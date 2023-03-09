@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quai antique - Restaurant savoyard - connexion{% endblock %}
+
+{% block body %}
+<div class="bg-dark text-white">
+
+    <h1 class="text-center bg-dark my-5">Connexion</h1>
+
+    <div class="d-flex justify-content-center container bg-light text-black rounded my-5 w-75">
+
+        <form action="{{ path('security.login') }}" method="post" class="d-flex justify-content-center flex-column">
+            <div class="form-group my-5">
+                <label for="username">Adresse email</label>
+                <input type="email" class="form-control" id="username" placeholder="john@doe.com" name="_username">
+                <small id="emailHelp" class="form-text text-muted">Nous ne partagerons pas votre email avec qui que ce soit</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control" id="password" placeholder="*******" name="_password">
+            </div>
+            <button type="submit" class="btn btn-danger my-5">Se connecter</button>
+        </form>
+
+
+    </div>
+
+</div>
+{% endblock %}
