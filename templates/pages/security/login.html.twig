@@ -9,6 +9,13 @@
 
 
     <div class="d-flex justify-content-center container bg-light text-black rounded my-5 w-75">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         {% if error %}
             <div class="alert alert-danger" role="alert">
                 {{ error.messageKey|trans(error.messageData, 'security') }}
