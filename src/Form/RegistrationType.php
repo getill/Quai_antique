@@ -20,14 +20,18 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('first_name', TextType::class, [
+                'row_attr' => [
+                    'class' => 'form-floating my-5',
+                ],
                 'attr' => [
+                    'placeholder' => 'Prénom',
                     'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '50',
                 ],
                 'label' => 'Prénom',
                 'label_attr' => [
-                    'class' => 'form-label mt-5'
+                    'class' => 'form-label'
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -36,14 +40,18 @@ class RegistrationType extends AbstractType
             ])
 
             ->add('second_name', TextType::class, [
+                'row_attr' => [
+                    'class' => 'form-floating mt-5',
+                ],
                 'attr' => [
+                    'placeholder' => 'Nom',
                     'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '50',
                 ],
                 'label' => 'Nom',
                 'label_attr' => [
-                    'class' => 'form-label mt-2'
+                    'class' => 'form-label'
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -52,14 +60,18 @@ class RegistrationType extends AbstractType
             ])
 
             ->add('email', EmailType::class, [
+                'row_attr' => [
+                    'class' => 'form-floating mt-5',
+                ],
                 'attr' => [
+                    'placeholder' => 'Adresse email',
                     'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '180',
                 ],
                 'label' => 'Adresse email',
                 'label_attr' => [
-                    'class' => 'form-label mt-2'
+                    'class' => 'form-label'
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -71,33 +83,45 @@ class RegistrationType extends AbstractType
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
+                    'row_attr' => [
+                        'class' => 'form-floating mt-5',
+                    ],
                     'attr' => [
+                        'placeholder' => 'Mot de passe',
                         'class' => 'form-control',
                     ],
                     'label' => 'Mot de passe',
                     'label_attr' => [
-                        'class' => 'form-label mt-2'
+                        'class' => 'form-label'
                     ]
                 ],
                 'second_options' => [
+                    'row_attr' => [
+                        'class' => 'form-floating mt-5',
+                    ],
                     'attr' => [
+                        'placeholder' => 'Confirmation du mot de passe',
                         'class' => 'form-control',
                     ],
                     'label' => 'Confirmation du mot de passe',
                     'label_attr' => [
-                        'class' => 'form-label mt-2'
+                        'class' => 'form-label'
                     ],
                 ],
                 'invalid_message' => 'Les mots de passe ne correspondent pas.'
             ])
 
             ->add('people_pref', IntegerType::class, [
+                'row_attr' => [
+                    'class' => 'form-floating mt-5',
+                ],
                 'attr' => [
+                    'placeholder' => 'Nombre de convives préférés',
                     'class' => 'form-control',
                 ],
                 'label' => 'Nombre de convives préférés',
                 'label_attr' => [
-                    'class' => 'form-label mt-2'
+                    'class' => 'form-label'
                 ],
                 'constraints' => [
                     new Assert\Length(['max' => '9'])
@@ -107,8 +131,9 @@ class RegistrationType extends AbstractType
 
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-danger my-5 text-center'
-                ]
+                    'class' => 'btn btn-danger my-5'
+                ],
+                'label' => 'S\'inscrire'
             ]);
     }
 

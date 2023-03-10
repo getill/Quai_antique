@@ -16,3 +16,7 @@ body{
   text-align: justify !important;
   text-justify: auto !important;
 }
+
+form {
+  width: 50vw !important;
+}
