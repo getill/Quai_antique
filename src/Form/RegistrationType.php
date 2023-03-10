@@ -112,24 +112,26 @@ class RegistrationType extends AbstractType
             ])
 
             ->add('people_pref', IntegerType::class, [
+                'required' => false,
                 'row_attr' => [
                     'class' => 'form-floating mt-5',
                 ],
                 'attr' => [
+                    'min' => 1,
+                    'max' => 9,
                     'placeholder' => 'Nombre de convives préférés',
                     'class' => 'form-control',
                 ],
                 'label' => 'Nombre de convives préférés',
                 'label_attr' => [
                     'class' => 'form-label'
-                ],
-                'constraints' => [
-                    new Assert\Length(['max' => '9'])
-                ],
-                'invalid_message' => '9 convives maximum.'
+                ]
             ])
 
             ->add('submit', SubmitType::class, [
+                'row_attr' => [
+                    'class' => 'd-grid gap-2 col-xl-6 mx-auto',
+                ],
                 'attr' => [
                     'class' => 'btn btn-danger my-5'
                 ],

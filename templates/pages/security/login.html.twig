@@ -8,7 +8,7 @@
     <h1 class="text-center bg-dark my-5">Connexion</h1>
 
 
-    <div class="d-flex justify-content-center container bg-light text-black rounded my-5 w-75">
+    <div class="d-flex flex-column align-items-center justify-content-center container bg-light text-black rounded my-5 w-75">
 
         {% for message in app.flashes('success') %}
             <div class="alert alert-success mt-4">
@@ -32,7 +32,9 @@
                 <label for="password">Mot de passe</label>
                 <input type="password" class="form-control" id="password" placeholder="*******" name="_password">
             </div>
-            <button type="submit" class="btn btn-danger my-5">Se connecter</button>
+            <div class="d-grid gap-2 col-xl-6 mx-auto">
+                <button type="submit" class="btn btn-danger my-5">Se connecter</button>
+            </div>
         </form>
 
 
