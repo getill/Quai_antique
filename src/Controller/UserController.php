@@ -66,9 +66,29 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * Edit password
+     *
+     * @param User $user
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UserPasswordHasherInterface $hasher
+     * @return Response
+     */
     #[Route('/utilisateur/edition-mot-de-passe/{id}', name: 'user.edit.password', methods: ['GET', 'POST'])]
     public function editPassword(User $user, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
+
+        // If the user is not connected, he get redirected to the login page
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('security.login');
+        }
+
+        // If someone try to modify another account, he get redirected to home
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute('home.index');
+        }
+
         $form = $this->createForm(UserPasswordType::class);
 
         $form->handleRequest($request);
