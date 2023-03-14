@@ -11,16 +11,16 @@
     <div class="d-flex flex-column align-items-center justify-content-center container bg-light text-black rounded my-5 w-75">
 
         {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4">
+            <div class="alert alert-success mt-5">
                 {{ message }}
             </div>
         {% endfor %}
 
-        {% if error %}
-            <div class="alert alert-danger" role="alert">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
+        {% for message in app.flashes('warning') %}
+            <div class="alert alert-danger mt-5" role="alert">
+                {{ message }}
             </div>
-        {% endif %}
+        {% endfor %}
         
         <form action="{{ path('security.login') }}" method="post" class="d-flex justify-content-center flex-column">
             <div class="form-group my-5">
