@@ -7,8 +7,13 @@
 
     <h1 class="text-center bg-dark my-5">Modification du compte</h1>
 
-    <div class="d-flex justify-content-center container bg-light text-black rounded my-5 w-75 text-center">
-    
+    <div class="d-flex flex-column align-items-center justify-content-center container bg-light text-black rounded my-5 w-75">
+        {% for message in app.flashes('warning') %}
+            <div class="alert alert-warning mt-5 mb-0">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         {{ form(form, {'attr': {'style': 'width: 50vw'}} ) }}
 
     </div>

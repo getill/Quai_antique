@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class UserType extends AbstractType
 {
@@ -55,6 +57,19 @@ class UserType extends AbstractType
                 ]
             ])
 
+            ->add('plainPassword', PasswordType::class, [
+                'row_attr' => [
+                    'class' => 'form-floating mt-5',
+                ],
+                'attr' => [
+                    'placeholder' => 'Mot de passe',
+                    'class' => 'form-control',
+                ],
+                'label' => 'Mot de passe',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ]
+            ])
             ->add('submit', SubmitType::class, [
                 'row_attr' => [
                     'class' => 'd-grid gap-2 col-xl-6 mx-auto',

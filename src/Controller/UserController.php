@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
@@ -21,7 +22,7 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/utilisateur/edition/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
-    public function edit(User $user, Request $request, EntityManagerInterface $manager): Response
+    public function edit(User $user, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
         // If the user is not connected, he get redirected to the login page
         if (!$this->getUser()) {
@@ -36,17 +37,27 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-            $manager->persist($user);
-            $manager->flush();
+            if ($hasher->isPasswordValid($user, $form->getData()->getPlainPassword())) {
 
-            $this->addFlash(
-                'success',
-                'Les informations ont été modifiées!'
-            );
+                $user = $form->getData();
+                $manager->persist($user);
+                $manager->flush();
 
-            return $this->redirectToRoute('security.login');
+                $this->addFlash(
+                    'success',
+                    'Les informations ont été modifiées!'
+                );
+
+                return $this->redirectToRoute('security.login');
+            } else {
+
+                $this->addFlash(
+                    'warning',
+                    'Mot de passe incorrect.'
+                );
+            }
         }
 
         return $this->render('pages/user/edit.html.twig', [
