@@ -22,6 +22,15 @@ class SecurityController extends AbstractController
     #[Route('/connexion', name: 'security.login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+
+        // $user = $this->getUser();
+        // $form = $this->createForm(RegistrationType::class, $user);
+
+        // $form->handleRequest($request);
+        // if ($form->isSubmitted() && $form->isValid() && $user->getRoles() === 'ROLE_ADMIN') {
+        //     return $this->redirectToRoute('admin.index');
+        // }
+
         return $this->render('pages/security/login.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError()
