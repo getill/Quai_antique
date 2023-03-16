@@ -14,7 +14,18 @@
           <h5>Quai antique</h5>
           <p>2 rue du quai, 73000 Chambéry</p>
           <br>
-          <p>Ouvert du mardi au Dimanche de 12h00 à 14h30 puis de 19h00 à 22h30</p>
+        </div>
+        <div class="col-6 col-md text-center">
+          <a class="btn btn-warning" data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+            Horaires d'ouverture
+          </a>
+          <div class="collapse" id="collapse">
+            <div class="card card-body">
+             {% for weekdays in 'home.index' %}
+            <p>{{ weekdays.id }}</p>
+        {% endfor %}
+            </div>
+          </div>
         </div>
         <div class="col-6 col-md text-center">
           <a role="button" class="btn btn-outline-dark me-lg-2 mb-3 mb-lg-0" href="{{ path('security.registration') }}">S'inscrire</a>
