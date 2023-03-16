@@ -19,6 +19,8 @@ security:
       form_login:
         login_path: security.login
         check_path: security.login
+      login_throttling:
+        max_attempts: 3
       logout:
         path: security.logout
 
