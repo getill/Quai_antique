@@ -32,7 +32,7 @@ class UserController extends AbstractController
 
         // If someone try to modify another account, he get redirected to home
         if ($this->getUser() !== $user) {
-            return $this->redirectToRoute('home.index');
+            return $this->redirectToRoute('home');
         }
 
         $form = $this->createForm(UserType::class, $user);
@@ -86,7 +86,7 @@ class UserController extends AbstractController
 
         // If someone try to modify another account, he get redirected to home
         if ($this->getUser() !== $user) {
-            return $this->redirectToRoute('home.index');
+            return $this->redirectToRoute('home');
         }
 
         $form = $this->createForm(UserPasswordType::class);

@@ -21,9 +21,10 @@
           </a>
           <div class="collapse" id="collapse">
             <div class="card card-body">
-             {% for weekdays in 'home.index' %}
-            <p>{{ weekdays.id }}</p>
-        {% endfor %}
+              {% for index in weekdays and time %}
+                {{ "%s : %s" | format(index.name, index.openam) }}
+              {% endfor %}
+
             </div>
           </div>
         </div>
