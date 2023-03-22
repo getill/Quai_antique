@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Restaurant;
+use App\Entity\RestaurantWeekdayTimetable;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -31,6 +32,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Restaurant', 'fas fa-utensils-alt', Restaurant::class);
+        yield MenuItem::linkToCrud('Horaires d\'ouverture', 'fas fa-utensils-alt', RestaurantWeekdayTimetable::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fa-solid fa-users', User::class);
     }
 }

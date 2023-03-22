@@ -21,9 +21,19 @@
           </a>
           <div class="collapse" id="collapse">
             <div class="card card-body">
-              {% for index in weekdays and time %}
-                {{ "%s : %s" | format(index.name, index.openam) }}
-              {% endfor %}
+            <div class="row d-flex flex-row ">
+              <div class="col-6 d-flex justify-content-around flex-column">
+                {% for index in weekdays %}
+                  <p>{{ index.name }} :</p>
+                {% endfor %}
+              </div>
+              <div class="col-6 d-flex justify-content-around flex-column">
+                {% for index in time %}
+                  <p>{{ index.openam | format_time('short') }} - {{index.closeam | format_time('short') }} / {{ index.openpm | format_time('short') }} - {{ index.closepm | format_time('short') }}</p>
+                {% endfor %}
+              </div>
+            </div>
+            
 
             </div>
           </div>

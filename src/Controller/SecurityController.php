@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Repository\RestaurantWeekdayRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\RestaurantWeekdayTimetableRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -20,7 +22,7 @@ class SecurityController extends AbstractController
      * @return Response
      */
     #[Route('/connexion', name: 'security.login', methods: ['GET', 'POST'])]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository): Response
     {
 
         // $user = $this->getUser();
@@ -33,6 +35,8 @@ class SecurityController extends AbstractController
 
 
         return $this->render('pages/security/login.html.twig', [
+            'time' => $timeRepository->findAll(),
+            'weekdays' => $dayRepository->findAll(),
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError()
         ]);
@@ -57,7 +61,7 @@ class SecurityController extends AbstractController
      * @return Response
      */
     #[Route('/inscription', 'security.registration', methods: ['GET', 'POST'])]
-    public function registration(Request $request, EntityManagerInterface $manager): Response
+    public function registration(Request $request, EntityManagerInterface $manager, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository): Response
     {
         $user = new User();
         $user->setRoles(['ROLE_USER']);
@@ -80,6 +84,8 @@ class SecurityController extends AbstractController
 
 
         return $this->render('pages/security/registration.html.twig', [
+            'time' => $timeRepository->findAll(),
+            'weekdays' => $dayRepository->findAll(),
             'form' => $form->createView()
         ]);
     }
