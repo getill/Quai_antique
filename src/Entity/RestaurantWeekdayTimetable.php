@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RestaurantWeekdayTimetableRepository;
+use Container5yMYd82\getNumberConfiguratorService;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -83,6 +84,11 @@ class RestaurantWeekdayTimetable
         return $this;
     }
 
+
+    public function getNameWeekday(): ?string
+    {
+        return $this->weekday_id->getName();
+    }
     public function getIdWeekday(): ?RestaurantWeekday
     {
         return $this->weekday_id;

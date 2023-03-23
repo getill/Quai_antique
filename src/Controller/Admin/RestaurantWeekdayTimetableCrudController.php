@@ -5,6 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\RestaurantWeekdayTimetable;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 
 class RestaurantWeekdayTimetableCrudController extends AbstractCrudController
@@ -18,10 +22,18 @@ class RestaurantWeekdayTimetableCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            TextField::new('NameWeekday', 'Jour de la semaine'),
             TimeField::new('openam', 'Ouverture matin'),
             TimeField::new('closeam', 'Fermeture matin'),
             TimeField::new('openpm', 'Ouverture soir'),
             TimeField::new('closepm', 'fermeture soir'),
         ];
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            // ...
+            ->remove(Crud::PAGE_INDEX, Action::DELETE)
+            ->remove(Crud::PAGE_DETAIL, Action::DELETE);
     }
 }
