@@ -84,7 +84,6 @@ class RestaurantWeekdayTimetable
         return $this;
     }
 
-
     public function getNameWeekday(): ?string
     {
         return $this->weekday_id->getName();

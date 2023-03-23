@@ -22,7 +22,8 @@ class RestaurantWeekdayTimetableCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('NameWeekday', 'Jour de la semaine'),
+            TextField::new('NameWeekday', 'Jour de la semaine')
+                ->setFormTypeOption('disabled', 'disabled'),
             TimeField::new('openam', 'Ouverture matin'),
             TimeField::new('closeam', 'Fermeture matin'),
             TimeField::new('openpm', 'Ouverture soir'),
@@ -32,7 +33,6 @@ class RestaurantWeekdayTimetableCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            // ...
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_DETAIL, Action::DELETE);
     }
