@@ -25,15 +25,6 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository): Response
     {
 
-        // $user = $this->getUser();
-        // $form = $this->createForm(RegistrationType::class, $user);
-
-        // $form->handleRequest($request);
-        // if ($form->isSubmitted() && $form->isValid() && $user->getRoles() === 'ROLE_ADMIN') {
-        //     return $this->redirectToRoute('admin.index');
-        // }
-
-
         return $this->render('pages/security/login.html.twig', [
             'time' => $timeRepository->findAll(),
             'weekdays' => $dayRepository->findAll(),
