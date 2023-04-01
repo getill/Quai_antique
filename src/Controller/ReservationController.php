@@ -14,13 +14,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'reservation', methods: ['GET', 'POST'])]
-    public function reservation(RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, RestaurantRepository $restaurantRepository): Response
+    public function reservation(RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository): Response
     {
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
 
         return $this->render('pages/reservation.html.twig', [
-            'maxPeople' => $restaurantRepository->findAll(),
             'time' => $timeRepository->findAll(),
             'weekdays' => $dayRepository->findAll(),
             'controller_name' => 'ReservationController',

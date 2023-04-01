@@ -5,7 +5,7 @@
 
 {% block body %}
 
-<h1 class="text-center bg-dark my-5">Modification du mot de passe</h1>
+<h1 class="text-center text-white my-5">Réservation</h1>
 
     <div class="d-flex flex-column align-items-center justify-content-center container bg-light text-black rounded my-5 w-75">
         {% for message in app.flashes('warning') %}
@@ -14,7 +14,7 @@
             </div>
         {% endfor %}
 
-        {{ form(form, {'attr': {'style': 'width: 50vw'}} ) }}
+        {{ form(form, {'attr': {'style': 'width: 50vw'}}) }}
 
 
     </div>
