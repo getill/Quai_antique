@@ -84,13 +84,13 @@ class ReservationType extends AbstractType
 
     }
 
-    private function getAvailableTimes($date)
-    {
-        // Récupérer les horaires disponibles pour la date spécifiée
-        // et retourner un tableau d'options pour le champ de formulaire
-        $availableTimes = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
-        return array_combine($availableTimes, $availableTimes);
-    }
+    // private function getAvailableTimes($date)
+    // {
+    //     // Récupérer les horaires disponibles pour la date spécifiée
+    //     // et retourner un tableau d'options pour le champ de formulaire
+    //     $availableTimes = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
+    //     return array_combine($availableTimes, $availableTimes);
+    // }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

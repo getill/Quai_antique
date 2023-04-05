@@ -15,8 +15,17 @@
             </div>
         {% endfor %}
 
-        <input id="datetimepicker" type="text" >
-        {# {{ form(form, {'attr': {'style': 'width: 50vw'}}) }} #}
+        {# <input id="datetimepicker" type="text" > #}
+        {{ form(form, {'attr': {'style': 'width: 50vw'}}) }}
+
+        {% for reservation in reservationTime %}
+
+            <div>
+                <p>{{ reservation.datetime | format_time('short') }}</p>
+            </div>
+
+        {% endfor %}
+
 
 
     </div>
