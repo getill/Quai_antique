@@ -9,6 +9,7 @@
 <h1 class="text-center text-white my-5">Réservation</h1>
 
     <div class="d-flex flex-column align-items-center justify-content-center container bg-light text-black rounded my-5 w-75">
+    
         {% for message in app.flashes('warning') %}
             <div class="alert alert-warning mt-5 mb-0">
                 {{ message }}
@@ -16,19 +17,73 @@
         {% endfor %}
 
         {# <input id="datetimepicker" type="text" > #}
-        {{ form(form, {'attr': {'style': 'width: 50vw'}}) }}
+        {# {{ form(form, {'attr': {'style': 'width: 50vw'}}) }} #}
+        {{ form_start(form, {'attr': {'style': 'width: 50vw'}}) }}
 
-        {% for reservation in reservationTime %}
 
-            <div>
-                <p>{{ reservation.datetime | format_time('short') }}</p>
+            <div class="row g-2">
+                <div class="col-md">
+                    <div class="form-floating mt-5">
+                        <input class="form-control datepicker" id="floatingInputDate" placeholder="Choisir une date"/>
+                        <label for="floatingInputDate">Choisir une date</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                        {{ form_row(form.nb_people) }}
+                    </div>
+                </div>
             </div>
 
-        {% endfor %}
 
 
+
+            <ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
+                {% for reservation in reservationTime %}
+
+                    <li class="mx-1 my-1"><a class="btn btn-danger">{{ reservation.datetime | format_time('short') }}</a></li>
+
+                {% endfor %}
+            </ul>
+
+        {{ form_end(form) }}
 
     </div>
 
+    <script>
+        const picker = new easepick.create({
+            element: ".datepicker",
+            css: [
+                "https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css"
+            ],
+            zIndex: 10,
+            lang: "fr-FR",
+            format: "DD MMMM YYYY",
+            AmpPlugin: {
+                dropdown: {
+                    months: true,
+                    years: true,
+                    minYear: 2023,
+                    maxYear: 2026
+                }
+            },
+            LockPlugin: {
+                minDate: new Date(),
+                minDays: null,
+                maxDays: null
+            },
+            plugins: [
+                "AmpPlugin",
+                "LockPlugin"
+            ]
+        })
+
+        // Function to log dateData when selected
+        picker.isShown();
+        let input = document.querySelector(".easepick-wrapper");
+        input.addEventListener("click", () => {
+            console.log(picker.getDate())
+        });
+    </script>
 
 {% endblock %}

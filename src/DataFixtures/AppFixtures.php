@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Reservation;
 use Faker\Generator;
 use Faker\Factory;
 use App\Entity\User;
@@ -34,10 +35,19 @@ class AppFixtures extends Fixture
                 ->setPeoplePref(mt_rand(0, 1) === 1 ? $this->faker->randomDigitNot(0) : null)
                 ->setPlainPassword('E#NpeQm&5h9#PeL3');
 
-
+            $users[] = $user;
             $manager->persist($user);
         }
 
+        for ($i = 0; $i < 25; $i++) {
+            $reservation = new Reservation();
+            $reservation->setNbPeople(mt_rand(0, 13))
+                ->setDateTime($this->faker->dateTime())
+                ->setUser($users[mt_rand(0, count($users) - 1)]);
+
+
+            $manager->persist($reservation);
+        }
 
 
 

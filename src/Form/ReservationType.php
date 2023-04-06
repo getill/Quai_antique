@@ -29,20 +29,20 @@ class ReservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date_time', DateTimeType::class, [
-                // 'class' => Reservation::class,
-                // 'html5' => false,
-                'row_attr' => [
-                    'class' => 'my-5',
-                ],
-                'placeholder' => [
-                    'month' => 'Mois', 'day' => 'Jour',
-                ],
-                'attr' => [
-                    'class' => 'form-label'
-                ],
-                'label' => 'Date et heure de réservation'
-            ])
+            // ->add('date_time', DateType::class, [
+            //     // 'class' => Reservation::class,
+            //     // 'html5' => false,
+            //     'row_attr' => [
+            //         'class' => 'my-5',
+            //     ],
+            //     'placeholder' => [
+            //         'month' => 'Mois', 'day' => 'Jour',
+            //     ],
+            //     'attr' => [
+            //         'class' => 'form-label'
+            //     ],
+            //     'label' => 'Date et heure de réservation'
+            // ])
             ->add('nb_people', IntegerType::class, [
                 'row_attr' => [
                     'class' => 'form-floating my-5',
