@@ -8,6 +8,10 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import "./styles/app.css";
 
+// start the Stimulus application
+import "./bootstrap";
+
+// Easepick
 const picker = new easepick.create({
   element: ".datepicker",
   css: ["https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css"],
@@ -30,10 +34,28 @@ const picker = new easepick.create({
   plugins: ["AmpPlugin", "LockPlugin"],
 });
 
-// Function to log dateData when selected
+window.onload = () => {
+  // QueryString creation
+  const params = new URLSearchParams();
 
-picker.on("select", () => {
-  console.log(picker.getDate());
-});
-// start the Stimulus application
-import "./bootstrap";
+  // Functions to execute when selected
+  picker.on("select", () => {
+    let pickerDate = picker.getDate();
+    params.set("date", pickerDate.toLocaleDateString("fr"));
+    console.log(params.toString());
+
+    //Get active URL
+    const Url = new URL(window.location.href);
+
+    // AJAX request
+    fetch((Url.pathname = "?" + params.toString() + "&ajax=1"), {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((e) => alert(e));
+  });
+};

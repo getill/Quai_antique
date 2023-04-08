@@ -15,16 +15,26 @@ use Symfony\Component\HttpFoundation\Request;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'reservation')]
-    public function reservation(RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $repository): Response
+    public function reservation(RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $reservationrepository): Response
     {
         $form = $this->createForm(ReservationType::class);
         $form->handleRequest($request);
 
+        // Get date
+        $date = $request->get("date");
+        // dd($date);
+
+        // AJAX request verification
+        // if ($request->get('ajax')) {
+        //     return "ok";
+        // }
+
         return $this->render('pages/reservation.html.twig', [
+            'date' => $date,
             'time' => $timeRepository->findAll(),
             'weekdays' => $dayRepository->findAll(),
             'form' => $form->createView(),
-            'reservationTime' => $repository->findAll()
+            'reservationTime' => $reservationrepository->findAll()
         ]);
     }
 }
