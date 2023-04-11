@@ -1,0 +1,12 @@
+<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
+	{% for reservation in reservationTime %}
+
+		{% if date is same as(reservation.datetime | date("d/m/Y"))  %}
+
+			<li class="mx-1 my-1">
+				<a class="btn btn-danger">{{ reservation.datetime | format_time('short') }}</a>
+			</li>
+
+		{% endif %}
+	{% endfor %}
+</ul>

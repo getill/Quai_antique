@@ -10,6 +10,7 @@ use App\Repository\RestaurantWeekdayRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\RestaurantWeekdayTimetableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ReservationController extends AbstractController
@@ -25,9 +26,17 @@ class ReservationController extends AbstractController
         // dd($date);
 
         // AJAX request verification
-        // if ($request->get('ajax')) {
-        //     return "ok";
-        // }
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('partials/_reservationButtons.html.twig', [
+                    'date' => $date,
+                    'time' => $timeRepository->findAll(),
+                    'weekdays' => $dayRepository->findAll(),
+                    'form' => $form->createView(),
+                    'reservationTime' => $reservationrepository->findAll()
+                ])
+            ]);
+        }
 
         return $this->render('pages/reservation.html.twig', [
             'date' => $date,

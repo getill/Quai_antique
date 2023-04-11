@@ -17,7 +17,7 @@ const picker = new easepick.create({
   css: ["https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css"],
   zIndex: 10,
   lang: "fr-FR",
-  format: "DD MMMM YYYY",
+  format: "DD/MM/YYYY",
   AmpPlugin: {
     dropdown: {
       months: true,
@@ -42,19 +42,26 @@ window.onload = () => {
   picker.on("select", () => {
     let pickerDate = picker.getDate();
     params.set("date", pickerDate.toLocaleDateString("fr"));
-    console.log(params.toString());
 
     //Get active URL
     const Url = new URL(window.location.href);
 
     // AJAX request
-    fetch((Url.pathname = "?" + params.toString() + "&ajax=1"), {
+    fetch(Url.pathname + "?" + params.toString() + "&ajax=1", {
       headers: {
         "X-Requested-With": "XMLHttpRequest",
       },
     })
-      .then((response) => {
-        console.log(response);
+      .then((response) => response.json())
+      .then((data) => {
+        // Get content
+        const content = document.querySelector("#content");
+
+        // Content replacement
+        content.innerHTML = data.content;
+
+        // URL Update
+        history.pushState({}, null, Url.pathname + "?" + params.toString());
       })
       .catch((e) => alert(e));
   });
