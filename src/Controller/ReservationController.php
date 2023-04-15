@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Reservation;
 use App\Form\ReservationType;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
-use App\Entity\RestaurantWeekdayTimetable;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\RestaurantWeekdayRepository;
@@ -28,15 +25,29 @@ class ReservationController extends AbstractController
         $date = $request->get("date");
 
         //------------- Time creation logic ------------------
-        $array_of_time = array();
+        $createdTime = array();
         $openAm = $timeRepository->find('1')->getOpenAm()->getTimestamp();
         $closeAm = $timeRepository->find('1')->getCloseAm()->getTimestamp();
         $fifteen_mins  = 15 * 60;
 
+
+        //-------------- transorm every booked datetime into timestamp ------------
+        $bookedTime = $reservationrepository->findAll();
+
+        foreach ($bookedTime as &$value) {
+            $value = $value->getDateTime()->getTimestamp();
+            $value = date("H:i", $value);
+        }
+        // dd($bookedTime);
+        unset($value);
+
         while ($openAm <= $closeAm) {
-            $array_of_time[] = date("H:i", $openAm);
+            $createdTime[] = date("H:i", $openAm);
             $openAm += $fifteen_mins;
         }
+
+        $result = array_diff($createdTime, $bookedTime);
+        print_r($result);
         //-------------------------------------------
 
 
@@ -49,7 +60,7 @@ class ReservationController extends AbstractController
                     'weekdays' => $dayRepository->findAll(),
                     'form' => $form->createView(),
                     'reservationDateTime' => $reservationrepository->findAll(),
-                    'reservationTime' => $array_of_time
+                    'availableDate' => $result
                 ])
 
             ]);
@@ -61,7 +72,7 @@ class ReservationController extends AbstractController
             'weekdays' => $dayRepository->findAll(),
             'form' => $form->createView(),
             'reservationDateTime' => $reservationrepository->findAll(),
-            'reservationTime' => $array_of_time
+            'availableDate' => $result
         ]);
     }
 }

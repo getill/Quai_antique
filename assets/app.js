@@ -10,6 +10,7 @@ import "./styles/app.css";
 
 // start the Stimulus application
 import "./bootstrap";
+console.log("🔪 GET ILL.");
 
 // Easepick
 const picker = new easepick.create({
