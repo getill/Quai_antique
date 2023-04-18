@@ -23,36 +23,62 @@ class ReservationController extends AbstractController
 
         // Get date
         $date = $request->get("date");
+        // dd($date);
 
         //------------- Time creation logic ------------------
+
         $createdTime = array();
         $openAm = $timeRepository->find('1')->getOpenAm()->getTimestamp();
-        $closeAm = $timeRepository->find('1')->getCloseAm()->getTimestamp();
+        $closeAm = $timeRepository->find('1')->getCloseAm()->getTimestamp() - 3600; // Close Am - 1 hour
+        // dd($closeAm);
         $fifteen_mins  = 15 * 60;
-
-
-        //-------------- transorm every booked datetime into timestamp ------------
-        $bookedTime = $reservationrepository->findAll();
-
-        foreach ($bookedTime as &$value) {
-            $value = $value->getDateTime()->getTimestamp();
-            $value = date("H:i", $value);
-        }
-        // dd($bookedTime);
-        unset($value);
 
         while ($openAm <= $closeAm) {
             $createdTime[] = date("H:i", $openAm);
             $openAm += $fifteen_mins;
         }
 
-        $result = array_diff($createdTime, $bookedTime);
-        print_r($result);
-        //-------------------------------------------
+        //-------------- transorm every booked datetime into timestamp ------------
 
 
-        // AJAX request verification
+        //---- Booked Time Array 
+
+        $bookedTime = $reservationrepository->findAll();
+
+        foreach ($bookedTime as &$value) {
+            $value = $value->getDateTime()->getTimestamp();
+            $value = date("H:i", $value);
+        }
+        unset($value);
+        // dd($bookedTime);
+
+
+
+
+        //-------------- Compare [created time] and [booked times] -----------------------
+
+        // print_r($result);
+
+
+
+        //--------------- AJAX request verification -----------------------------
+
+        $bookedDate = $reservationrepository->findAll();
+        $result = null;
+        // dd($value, $date);
         if ($request->get('ajax')) {
+
+            //----- Booked Date Array
+
+            foreach ($bookedDate as &$value) {
+                $value = $value->getDateTime()->getTimestamp();
+                $value = date("d/m/Y", $value);
+                $result = array_search($date, $bookedDate);
+            }
+            // dd($bookedDate);
+            dd($result);
+            // dd($bookedDate, $date);
+            unset($value);
             return new JsonResponse([
                 'content' => $this->renderView('partials/_reservationButtons.html.twig', [
                     'date' => $date,
@@ -65,6 +91,8 @@ class ReservationController extends AbstractController
 
             ]);
         }
+
+        $result = array_diff($createdTime, $bookedTime);
 
         return $this->render('pages/reservation.html.twig', [
             'date' => $date,
