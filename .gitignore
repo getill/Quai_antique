@@ -8,6 +8,10 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+###< Img ###
+/public/assets/img
+###< Img ###
+
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache

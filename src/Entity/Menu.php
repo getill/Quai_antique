@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\MenuRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MenuRepository;
+
 
 #[ORM\Entity(repositoryClass: MenuRepository::class)]
 class Menu
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -19,7 +21,7 @@ class Menu
     #[ORM\Column(length: 150)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
 
     #[ORM\Column(length: 50)]
