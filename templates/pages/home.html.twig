@@ -1,76 +1,86 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Quai antique - Restaurant savoyard - Accueil{% endblock %}
+{% block title %}Quai antique - Restaurant savoyard - Accueil
+{% endblock %}
 
 {% block body %}
 
-  <div class="bg-dark text-white">
-    <div class="d-flex justify-content-center">
-      <img class="img object-fit-cover" src="{{ asset('assets/img/Head.jpg') }}" alt="Fondue savoyarde">
-    </div>
+	<div class="bg-dark text-white">
+		<div class="d-flex justify-content-center">
+			<img class="img object-fit-cover" src="{{ asset('assets/img/Head.jpg') }}" alt="Fondue savoyarde">
+		</div>
 
 
-    <div class="album py-5">
-    
-      <div class="container mb-5">
-        <h2>La sélection du chef !</h2>
-        <p class="lead justify">Le chef nous fait l'honneur de nous recommander ces plats du moment. <br> PS: Il ne se vexera pas si vous prenez autre chose, promis!</p>
-      </div>
-      <div class="container">
+		<div class="album py-5">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="https://i.imgur.com/K9OIEzK.png" height="225" width="100%" alt="Test 1">
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm mb-5">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            </div>
-          </div>
-        </div>
+			<div class="container mb-5">
+				<h2>La sélection du chef !</h2>
+				<p class="lead justify">Le chef nous fait l'honneur de nous recommander ces plats du moment.
+					<br>
+					PS: Il ne se vexera pas si vous prenez autre chose, promis!</p>
+			</div>
+			<div class="container">
 
-        <div class="container text-center">
-          <a href="{{ path('reservation') }}" class="btn btn-danger" role="button">Réserver</a>
-        </div>
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+					<div class="col">
+						<div class="card shadow-sm">
+							<img src="https://www.hervecuisine.com/wp-content/uploads/2017/12/recette-raclette.jpg.webp?x79635" height="225" width="100%" alt="Test 1">
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm">
+							<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveaspectratio="xMidYMid slice" focusable="false">
+								<title>Placeholder</title>
+								<rect width="100%" height="100%" fill="#55595c"></rect>
+								<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+							</svg>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm mb-5">
+							<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveaspectratio="xMidYMid slice" focusable="false">
+								<title>Placeholder</title>
+								<rect width="100%" height="100%" fill="#55595c"></rect>
+								<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+							</svg>
+						</div>
+					</div>
+				</div>
 
-      </div>
-    </div>
+				<div class="container text-center">
+					<a href="{{ path('reservation') }}" class="btn btn-danger" role="button">Réserver</a>
+				</div>
 
-    <div class="text-center">
-      <h2>Nos menus</h2>
-      <div class="container col-xxl-8 px-4 py-2">
-        <div class="row flex-lg-row-reverse align-items-center justify-content-center g-5 py-2">
-          <div class="col-10 col-sm-8 col-lg-6">
-            <img src="{{ asset('assets/img/Head.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-          </div>
-          <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">Menu 1</h1>
-            <p class="lead menu">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-          </div>
-        </div>
-      </div>
+			</div>
+		</div>
 
-      <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row align-items-center justify-content-center g-5 py-2">
-          <div class="col-10 col-sm-8 col-lg-6">
-            <img src="{{ asset('assets/img/Head.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-          </div>
-          <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">Menu 2</h1>
-            <p class="lead justify">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-          
-  </div>
-        
+		<div class="text-center">
+			<h2>Nos menus</h2>
+			<div class="container col-xxl-8 px-4 py-2">
+				<div class="row flex-lg-row-reverse align-items-center justify-content-center g-5 py-2">
+					<div class="col-10 col-sm-8 col-lg-6">
+						<img src="{{ asset('assets/img/Head.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+					</div>
+					<div class="col-lg-6">
+						<h1 class="display-5 fw-bold lh-1 mb-3">Menu 1</h1>
+						<p class="lead menu">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="container col-xxl-8 px-4 py-5">
+				<div class="row flex-lg-row align-items-center justify-content-center g-5 py-2">
+					<div class="col-10 col-sm-8 col-lg-6">
+						<img src="{{ asset('assets/img/Head.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+					</div>
+					<div class="col-lg-6">
+						<h1 class="display-5 fw-bold lh-1 mb-3">Menu 2</h1>
+						<p class="lead justify">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
 {% endblock %}
-

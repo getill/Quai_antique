@@ -6,4 +6,16 @@
 {% block body %}
 	<h1 class="text-center text-white my-5">La carte</h1>
 
+	{% for menu in plats %}
+		<div class="card" style="width: 18rem;">
+			<img src="{{menu.img}}" class="card-img-top" alt="{{menu.imgtitle}}">
+			<div class="card-body">
+				<h5 class="card-title">{{menu.name}}</h5>
+				<p class="card-text">{{menu.description}}</p>
+			</div>
+		</div>
+
+	{% endfor %}
+
+
 {% endblock %}
