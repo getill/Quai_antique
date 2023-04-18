@@ -1,49 +1,64 @@
-  <footer class="py-5 bg-light">
-    <div class="container text-center border-bottom">
-      <div class="row align-items-center d-flex flex-column flex-lg-row">
-        <div class="col-6 col-md">
-          <h5>Plan du site</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="link-secondary" href="{{ path('home') }}">Accueil</a></li>
-            <li><a class="link-secondary" href="#">La carte</a></li>
-            <li><a class="link-secondary" href="{{ path('reservation') }}">Réservation</a></li>
-            <li><a class="link-secondary" href="{{ path('admin.index') }}">Administration</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-md text-center mb-lg-0 mb-5">
-          <h5>Quai antique</h5>
-          <p class="mb-0">2 rue du quai, 73000 Chambéry</p>
-        </div>
-        <div class="col-6 w-100 col-md text-center mb-lg-0 mb-5">
-          <a class="btn btn-warning " data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
-            Horaires d'ouverture
-          </a>
-          <div class="collapse mt-2" id="collapse">
-            <div class="card card-body">
-            <div class="row d-flex flex-row ">
-              <div class="col-6 d-flex justify-content-around flex-column">
-                {% for index in weekdays %}
-                  <p>{{ index.name }} :</p>
-                {% endfor %}
-              </div>
-              <div class="col-6 d-flex justify-content-around flex-column">
-                {% for index in time %}
-                  <p>{{ index.openam | format_time('short') }} - {{index.closeam | format_time('short') }} / {{ index.openpm | format_time('short') }} - {{ index.closepm | format_time('short') }}</p>
-                {% endfor %}
-              </div>
-            </div>
-            
+<footer class="py-5 bg-light">
+	<div class="container text-center border-bottom">
+		<div class="row align-items-center d-flex flex-column flex-lg-row">
+			<div class="col-6 col-md">
+				<h5>Plan du site</h5>
+				<ul class="list-unstyled text-small">
+					<li>
+						<a class="link-secondary" href="{{ path('home') }}">Accueil</a>
+					</li>
+					<li>
+						<a class="link-secondary" href="{{ path('menu') }}">La carte</a>
+					</li>
+					<li>
+						<a class="link-secondary" href="{{ path('reservation') }}">Réservation</a>
+					</li>
+					<li>
+						<a class="link-secondary" href="{{ path('admin.index') }}">Administration</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-6 col-md text-center mb-lg-0 mb-5">
+				<h5>Quai antique</h5>
+				<p class="mb-0">2 rue du quai, 73000 Chambéry</p>
+			</div>
+			<div class="col-6 w-100 col-md text-center mb-lg-0 mb-5">
+				<a class="btn btn-warning " data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+					Horaires d'ouverture
+				</a>
+				<div class="collapse mt-2" id="collapse">
+					<div class="card card-body">
+						<div class="row d-flex flex-row ">
+							<div class="col-6 d-flex justify-content-around flex-column">
+								{% for index in weekdays %}
+									<p>{{ index.name }}
+										:</p>
+								{% endfor %}
+							</div>
+							<div class="col-6 d-flex justify-content-around flex-column">
+								{% for index in time %}
+									<p>{{ index.openam | format_time('short') }}
+										-
+										{{index.closeam | format_time('short') }}
+										/
+										{{ index.openpm | format_time('short') }}
+										-
+										{{ index.closepm | format_time('short') }}</p>
+								{% endfor %}
+							</div>
+						</div>
 
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md text-center">
-          <a role="button" class="btn btn-outline-dark me-lg-2 mb-3 mb-lg-0" href="{{ path('security.registration') }}">S'inscrire</a>
-          <a role="button" class="btn btn-danger me-lg-2 mb-3 mb-lg-0" href="{{ path('security.login') }}">Connexion</a>
-        </div>
-      </div>
-    </div>
-    <div class="container mt-3">
-      <p>© Théo Lemray - 2023 | Pour la savoie !</p>
-    </div>
-  </footer>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col-md text-center">
+				<a role="button" class="btn btn-outline-dark me-lg-2 mb-3 mb-lg-0" href="{{ path('security.registration') }}">S'inscrire</a>
+				<a role="button" class="btn btn-danger me-lg-2 mb-3 mb-lg-0" href="{{ path('security.login') }}">Connexion</a>
+			</div>
+		</div>
+	</div>
+	<div class="container mt-3">
+		<p>© Théo Lemray - 2023 | Pour la savoie !</p>
+	</div>
+</footer>
