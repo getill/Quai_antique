@@ -19,35 +19,24 @@
 					<br>
 					PS: Il ne se vexera pas si vous prenez autre chose, promis!</p>
 			</div>
+
 			<div class="container">
 
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-					<div class="col">
-						<div class="card shadow-sm">
-							<img src="https://www.hervecuisine.com/wp-content/uploads/2017/12/recette-raclette.jpg.webp?x79635" height="225" width="100%" alt="Test 1">
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveaspectratio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c"></rect>
-								<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-							</svg>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm mb-5">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveaspectratio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c"></rect>
-								<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-							</svg>
-						</div>
-					</div>
+					{% for menu in plats %}
+						{% if menu.selected %}
+							<div class="col">
+								<div class="card shadow-sm">
+									<img src="/assets/img/dishes/{{menu.img}}" class="thumbnail" height="225" width="100%" alt="{{menu.name}}" title="{{menu.name}}">
+								</div>
+							</div>
+						{% endif %}
+
+					{% endfor %}
+
 				</div>
 
-				<div class="container text-center">
+				<div class="container text-center mt-5">
 					<a href="{{ path('reservation') }}" class="btn btn-danger" role="button">Réserver</a>
 				</div>
 
