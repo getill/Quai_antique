@@ -1,9 +1,9 @@
-<header class="p-3 text-bg-dark">
+<header class="p-1 text-bg-dark">
 
 	<nav class="navbar navbar-dark bg-dark navbar-expand-lg justify-content-center">
 
 		<div class="container-fluid">
-			<a class="navbar-brand text-white" href="{{ path('home') }}">Quai antique</a>
+			<a class="navbar-brand text-white castoro fs-2" href="{{ path('home') }}">Quai antique</a>
 
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -11,9 +11,9 @@
 
 			<div class="collapse navbar-collapse" id="navbarToggler">
 
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 lexend fs-6">
 					<li class="nav-item">
-						<a class="nav-link active text-white" aria-current="page" href="{{ path('home') }}">Accueil</a>
+						<a class="nav-link text-white" aria-current="page" href="{{ path('home') }}">Accueil</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-white" href="{{ path('menu') }}">La carte</a>
@@ -23,7 +23,7 @@
 					</li>
 				</ul>
 
-				<div class="d-flex">
+				<div class="d-flex lexend">
 					{% if app.user %}
 						<div class="dropdown">
 							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bonjour

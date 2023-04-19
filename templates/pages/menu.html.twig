@@ -7,7 +7,7 @@
 	<h1 class="text-center text-white my-5">La carte</h1>
 
 	<div class="container">
-		<h2 class="text-white text-start my-5 ms-5">Entrées</h2>
+		<h3 class="text-white text-start my-5 ms-5">Entrées</h3>
 
 		<div class="d-flex align-items-stretch justify-content-center row row-cols-1 row-cols-md-3 g-4 w-75 mx-auto mb-5">
 
@@ -20,6 +20,7 @@
 								<h5 class="card-title">{{menu.name}}</h5>
 								<p class="card-text">{{menu.description|u.truncate(100)}}</p>
 							</div>
+							<div class="card-footer bg-transparent">{{menu.price}}€</div>
 						</div>
 					</div>
 				{% endif %}
@@ -27,7 +28,7 @@
 		</div>
 
 
-		<h2 class="text-white my-5 ms-5">Plats</h2>
+		<h3 class="text-white my-5 ms-5">Plats</h3>
 
 		<div class="d-flex align-items-stretch justify-content-center row row-cols-1 row-cols-md-3 g-4 w-75 mx-auto mb-5">
 			{% for menu in plats %}
@@ -39,13 +40,14 @@
 								<h5 class="card-title">{{menu.name}}</h5>
 								<p class="card-text">{{menu.description|u.truncate(100)}}</p>
 							</div>
+							<div class="card-footer bg-transparent">{{menu.price}}€</div>
 						</div>
 					</div>
 				{% endif %}
 			{% endfor %}
 		</div>
 
-		<h2 class="text-white my-5 ms-5">Desserts</h2>
+		<h3 class="text-white my-5 ms-5">Desserts</h3>
 
 		<div class="d-flex align-items-stretch justify-content-center row row-cols-1 row-cols-md-3 g-4 w-75 mx-auto mb-5">
 			{% for menu in plats %}
@@ -57,6 +59,7 @@
 								<h5 class="card-title">{{menu.name}}</h5>
 								<p class="card-text">{{menu.description}}</p>
 							</div>
+							<div class="card-footer bg-transparent">{{menu.price}}€</div>
 						</div>
 					</div>
 				{% endif %}

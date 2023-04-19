@@ -21,7 +21,7 @@ class Menu
     #[ORM\Column(length: 150)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $img = null;
 
     #[ORM\Column(length: 50)]
@@ -33,6 +33,9 @@ class Menu
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Categories $category = null;
+
+    #[ORM\Column]
+    private ?int $price = null;
 
     public function getId(): ?int
     {
@@ -107,6 +110,18 @@ class Menu
     public function setCategory(?Categories $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

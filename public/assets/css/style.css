@@ -2,9 +2,30 @@
   background-color: #ff2400 ;
 }
 
-body{
+.castoro{
+  font-family: 'Castoro', sans-serif;
+}
+.lexend{
   font-family: 'Lexend', sans-serif;
+}
+.arvo{
+  font-family: 'Arvo', sans-serif;
+}
+
+body{
   background: #212529 !important;
+}
+
+h1, h2{
+  font-family: 'Castoro', sans-serif;
+}
+
+h3{
+  font-family: 'Arvo', sans-serif;
+}
+
+p{
+  font-family: 'Arvo', sans-serif;
 }
 
 .img{
@@ -18,7 +39,11 @@ body{
 }
 
 .thumbnail{
-  
   object-fit: cover;
 }
+
+.nav-link:hover, .active{
+  color: #ff2400 !important;
+}
+
 

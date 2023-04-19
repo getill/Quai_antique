@@ -9,8 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-
-
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class MenuCrudController extends AbstractCrudController
 {
@@ -34,9 +33,15 @@ class MenuCrudController extends AbstractCrudController
                     'maxlength' => 100
                 ]
             ]),
+            IntegerField::new('price')->setFormTypeOptions([
+                'attr' => [
+                    'min' => 0
+                ]
+            ]),
             BooleanField::new('selected'),
             TextField::new('img_title')->onlyOnForms(),
-            ImageField::new('img')->setBasePath('/assets/img/dishes')
+            ImageField::new('img')
+                ->setBasePath('/assets/img/dishes')
                 ->setRequired(true)
                 ->setUploadDir('public/assets/img/dishes'),
             AssociationField::new('category')
