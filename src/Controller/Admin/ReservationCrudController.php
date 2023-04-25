@@ -19,7 +19,7 @@ class ReservationCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Quai antique - Adminitstration');
+            ->setPageTitle('index', 'Quai antique - Réservations');
     }
 
     /*

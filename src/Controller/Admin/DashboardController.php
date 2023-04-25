@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Menu;
 use App\Entity\Restaurant;
 use App\Entity\RestaurantWeekdayTimetable;
 use App\Entity\Reservation;
@@ -25,7 +26,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Quai Antique - administration')
+            ->setTitle('Quai Antique - Administration')
             ->renderContentMaximized();
     }
 
@@ -34,6 +35,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Restaurant', 'fa fa-home', Restaurant::class);
         yield MenuItem::linkToCrud('Horaires d\'ouverture', 'fa-regular fa-clock', RestaurantWeekdayTimetable::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fa-solid fa-users', User::class);
-        yield MenuItem::linkToCrud('Réservation', 'fa-solid fa-users', Reservation::class);
+        yield MenuItem::linkToCrud('Réservation', 'fa-regular fa-calendar', Reservation::class);
+        yield MenuItem::linkToCrud('La carte', 'fa-solid fa-utensils', Menu::class);
     }
 }

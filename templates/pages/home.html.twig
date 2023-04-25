@@ -1,127 +1,38 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Quai antique - Restaurant savoyard - Accueil{% endblock %}
+{% block title %}Quai antique - Restaurant savoyard - Accueil
+{% endblock %}
 
 {% block body %}
 
-  <div class="bg-dark text-white">
-    <div class="d-flex justify-content-center">
-      <img class="img object-fit-cover" src="{{ asset('assets/img/Head.jpg') }}" alt="Fondue savoyarde">
-    </div>
-
-
-    <div class="album py-5">
-    
-      <div class="container mb-5">
-        <h2>La sélection du chef !</h2>
-        <p class="lead justify">Le chef nous fait l'honneur de nous recommander ces plats du moment. <br> PS: Il ne se vexera pas si vous prenez autre chose, promis!</p>
-      </div>
-      <div class="container">
-
-<<<<<<< Updated upstream
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="https://i.imgur.com/K9OIEzK.png" height="225" width="100%" alt="Test 1">
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm mb-5">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            </div>
-          </div>
-        </div>
-=======
-			<div class="container mb-5">
-				<h2 class="fs-1">La sélection du chef !</h2>
-				<p class="fs-5 justify">Le chef nous fait l'honneur de nous recommander ces plats du moment.
-					<br>
-					PS: Il ne se vexera pas si vous prenez autre chose, promis!</p>
-			</div>
->>>>>>> Stashed changes
-
-        <div class="container text-center">
-          <a href="{{ path('reservation') }}" class="btn btn-danger" role="button">Réserver</a>
-        </div>
-
-      </div>
-    </div>
-
-<<<<<<< Updated upstream
-    <div class="text-center">
-      <h2>Nos menus</h2>
-      <div class="container col-xxl-8 px-4 py-2">
-        <div class="row flex-lg-row-reverse align-items-center justify-content-center g-5 py-2">
-          <div class="col-10 col-sm-8 col-lg-6">
-            <img src="{{ asset('assets/img/Head.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-          </div>
-          <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">Menu 1</h1>
-            <p class="lead menu">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-          </div>
-        </div>
-      </div>
-=======
-					{% endfor %}
-
-				</div>
-
-				<div class="container text-center mt-5">
-					<a href="{{ path('reservation') }}" class="btn btn-danger" role="button">Réserver</a>
-				</div>
-
-			</div>
-		</div>
-
-		<div class="text-center">
-			<h2 class="fs-1">Nos menus</h2>
-			<div class="container col-xxl-8 px-4 py-2">
-				<div class="row flex-lg-row-reverse align-items-center justify-content-center g-5 py-2">
-					<div class="col-10 col-sm-8 col-lg-6">
-						<img src="{{ asset('assets/img/Head.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-					</div>
-					<div class="col-lg-6">
-						<h2 class="display-6 fw-bold lh-1 mb-3">Menu 1 - 56€</h2>
-						<p class="lead justify">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="container col-xxl-8 px-4 py-5">
-				<div class="row flex-lg-row align-items-center justify-content-center g-5 py-2">
-					<div class="col-10 col-sm-8 col-lg-6">
-						<img src="{{ asset('assets/img/Head.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-					</div>
-					<div class="col-lg-6">
-						<h2 class="display-6 fw-bold lh-1 mb-3">Menu 2 - 65€</h2>
-						<p class="lead justify">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
+<div class="bg-dark text-white">
+	<div class="d-flex justify-content-center">
+		<img class="img object-fit-cover" src="{{ asset('assets/img/Head.jpg') }}" alt="Fondue savoyarde">
 	</div>
->>>>>>> Stashed changes
 
-      <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row align-items-center justify-content-center g-5 py-2">
-          <div class="col-10 col-sm-8 col-lg-6">
-            <img src="{{ asset('assets/img/Head.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-          </div>
-          <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">Menu 2</h1>
-            <p class="lead justify">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-          
-  </div>
-        
-{% endblock %}
 
+	<div class="album py-5">
+
+		<div class="container mb-5">
+			<h2>La sélection du chef !</h2>
+			<p class="lead justify">Le chef nous fait l'honneur de nous recommander ces plats du moment.
+				<br>
+				PS: Il ne se vexera pas si vous prenez autre chose, promis!</p>
+		</div>
+
+		<div class="container">
+
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				{% for menu in plats %}
+					{% if menu.selected %}
+						<div class="col">
+							<div class="card shadow-sm">
+								<img src="/assets/img/dishes/{{menu.img}}" class="thumbnail hover" height="225" width="100%" alt="{{menu.name}}" title="{{menu.name}}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{menu.name}}">
+							</div>
+						</div>
+					{% endif %}
+
+				{% endfor %}
+
+			</div>
+			<<<<<<<Updatedupstream<divclass="rowrow-cols-1row-cols-sm-2row-cols-md-3g-3"><divclass="col"><divclass="cardshadow-sm"><imgsrc="https://i.imgur.com/K9OIEzK.png"height="225"width="100%"alt="Test1"></div></div><divclass="col"><divclass="cardshadow-sm"><svgclass="bd-placeholder-imgcard-img-top"width="100%"height="225"xmlns="http://www.w3.org/2000/svg"role="img"aria-label="Placeholder:Thumbnail"preserveAspectRatio="xMidYMidslice"focusable="false"><title>Placeholder</title><rectwidth="100%"height="100%"fill="#55595c"></rect><textx="50%"y="50%"fill="#eceeef"dy=".3em">Thumbnail</text></svg></div></div><divclass="col"><divclass="cardshadow-smmb-5"><svgclass="bd-placeholder-imgcard-img-top"width="100%"height="225"xmlns="http://www.w3.org/2000/svg"role="img"aria-label="Placeholder:Thumbnail"preserveAspectRatio="xMidYMidslice"focusable="false"><title>Placeholder</title><rectwidth="100%"height="100%"fill="#55595c"></rect><textx="50%"y="50%"fill="#eceeef"dy=".3em">Thumbnail</text></svg></div></div></div>=======<divclass="containermb-5"><h2class="fs-1">Lasélectionduchef!</h2><pclass="fs-5justify">Lechefnousfaitl'honneurdenousrecommandercesplatsdumoment.<br>PS:Ilnesevexerapassivousprenezautrechose,promis!</p></div>>>>>>>>Stashedchanges<divclass="containertext-centermt-5"><ahref="{{path('reservation')}}"class="btnbtn-danger"role="button">Réserver</a></div></div></div><divclass="text-center"><h2>Nosmenus</h2><divclass="containercol-xxl-8px-4py-2"><divclass="rowflex-lg-row-reversealign-items-centerjustify-content-centerg-5py-2"><divclass="col-10col-sm-8col-lg-6"><imgsrc="{{asset('assets/img/Head.jpg')}}"class="d-blockmx-lg-autoimg-fluid"alt="BootstrapThemes"width="700"height="500"loading="lazy"></div><divclass="col-lg-6"><h1class="display-5fw-boldlh-1mb-3">Menu1</h1><pclass="leadjustify">Quicklydesignandcustomizeresponsivemobile-firstsiteswithBootstrap,theworld’smostpopularfront-endopensourcetoolkit,featuringSassvariablesandmixins,responsivegridsystem,extensiveprebuiltcomponents,andpowerfulJavaScriptplugins.</p><spanclass="fs-3">56€</span></div></div></div><<<<<<<Updatedupstream<divclass="text-center"><h2>Nosmenus</h2><divclass="containercol-xxl-8px-4py-2"><divclass="rowflex-lg-row-reversealign-items-centerjustify-content-centerg-5py-2"><divclass="col-10col-sm-8col-lg-6"><imgsrc="{{asset('assets/img/Head.jpg')}}"class="d-blockmx-lg-autoimg-fluid"alt="BootstrapThemes"width="700"height="500"loading="lazy"></div><divclass="col-lg-6"><h1class="display-5fw-boldlh-1mb-3">Menu1</h1><pclass="leadmenu">Quicklydesignandcustomizeresponsivemobile-firstsiteswithBootstrap,theworld’smostpopularfront-endopensourcetoolkit,featuringSassvariablesandmixins,responsivegridsystem,extensiveprebuiltcomponents,andpowerfulJavaScriptplugins.</p></div></div></div>======={%endfor%}</div><divclass="containertext-centermt-5"><ahref="{{path('reservation')}}"class="btnbtn-danger"role="button">Réserver</a></div></div></div><divclass="text-center"><h2class="fs-1">Nosmenus</h2><divclass="containercol-xxl-8px-4py-2"><divclass="rowflex-lg-row-reversealign-items-centerjustify-content-centerg-5py-2"><divclass="col-10col-sm-8col-lg-6"><imgsrc="{{asset('assets/img/Head.jpg')}}"class="d-blockmx-lg-autoimg-fluid"alt="BootstrapThemes"width="700"height="500"loading="lazy"></div><divclass="col-lg-6"><h2class="display-6fw-boldlh-1mb-3">Menu1-56€</h2><pclass="leadjustify">Quicklydesignandcustomizeresponsivemobile-firstsiteswithBootstrap,theworld’smostpopularfront-endopensourcetoolkit,featuringSassvariablesandmixins,responsivegridsystem,extensiveprebuiltcomponents,andpowerfulJavaScriptplugins.</p></div></div></div><divclass="containercol-xxl-8px-4py-5"><divclass="rowflex-lg-rowalign-items-centerjustify-content-centerg-5py-2"><divclass="col-10col-sm-8col-lg-6"><imgsrc="{{asset('assets/img/Head.jpg')}}"class="d-blockmx-lg-autoimg-fluid"alt="BootstrapThemes"width="700"height="500"loading="lazy"></div><divclass="col-lg-6"><h2class="display-6fw-boldlh-1mb-3">Menu2-65€</h2><pclass="leadjustify">Quicklydesignandcustomizeresponsivemobile-firstsiteswithBootstrap,theworld’smostpopularfront-endopensourcetoolkit,featuringSassvariablesandmixins,responsivegridsystem,extensiveprebuiltcomponents,andpowerfulJavaScriptplugins.</p></div></div></div></div></div>>>>>>>>Stashedchanges<divclass="containercol-xxl-8px-4py-5"><divclass="rowflex-lg-rowalign-items-centerjustify-content-centerg-5py-2"><divclass="col-10col-sm-8col-lg-6"><imgsrc="{{asset('assets/img/Head.jpg')}}"class="d-blockmx-lg-autoimg-fluid"alt="BootstrapThemes"width="700"height="500"loading="lazy"></div><divclass="col-lg-6"><h1class="display-5fw-boldlh-1mb-3">Menu2</h1><pclass="leadjustify">Quicklydesignandcustomizeresponsivemobile-firstsiteswithBootstrap,theworld’smostpopularfront-endopensourcetoolkit,featuringSassvariablesandmixins,responsivegridsystem,extensiveprebuiltcomponents,andpowerfulJavaScriptplugins.</p><spanclass="fs-3">65€</span></div></div></div></div></div>{%endblock%}

@@ -10,7 +10,33 @@ import "./styles/app.css";
 
 // start the Stimulus application
 import "./bootstrap";
+
 console.log("🔪 GET ILL.");
+
+var items = document.querySelectorAll(".nav-link");
+
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
+console.log(tooltipList);
+
+items.forEach((item, idx) => {
+  item.addEventListener("click", () => {
+    ToggleActive(item, idx);
+  });
+});
+
+function ToggleActive(el, index) {
+  el.classList.toggle("active");
+  items.forEach((item, idx) => {
+    if (idx !== index) {
+      item.classList.remove("active");
+    }
+  });
+}
 
 // Easepick
 const picker = new easepick.create({

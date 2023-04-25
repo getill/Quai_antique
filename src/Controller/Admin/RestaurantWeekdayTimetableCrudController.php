@@ -18,6 +18,12 @@ class RestaurantWeekdayTimetableCrudController extends AbstractCrudController
         return RestaurantWeekdayTimetable::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('index', 'Quai antique - Horaires d\'ouverture');
+    }
+
 
     public function configureFields(string $pageName): iterable
     {
@@ -34,6 +40,7 @@ class RestaurantWeekdayTimetableCrudController extends AbstractCrudController
     {
         return $actions
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
-            ->remove(Crud::PAGE_DETAIL, Action::DELETE);
+            ->remove(Crud::PAGE_DETAIL, Action::DELETE)
+            ->remove(Crud::PAGE_INDEX, Action::NEW);
     }
 }
