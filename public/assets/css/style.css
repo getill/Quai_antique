@@ -16,24 +16,6 @@ body{
   background: #212529 !important;
 }
 
-
-h1, h2{
-  font-family: 'Castoro', sans-serif;
-}
-
-h3{
-  font-family: 'Arvo', sans-serif;
-}
-
-p{
-  font-family: 'Arvo', sans-serif;
-}
-
-
-header {
-  background-color: #21252963 !important;
-}
-
 h1, h2{
   font-family: 'Castoro', sans-serif;
 }
@@ -49,7 +31,6 @@ p{
 header {
   background-color: #21252963 !important;
 }
-
 
 .img{
   height: 90vh;
@@ -61,7 +42,6 @@ header {
   text-justify: auto !important;
 }
 
-
 .thumbnail{
   object-fit: cover;
 }
@@ -73,17 +53,4 @@ header {
 .lead {
   font-size: 1.15rem !important;
 }
-
-.thumbnail{
-  object-fit: cover;
-}
-
-.nav-link:hover, .active{
-  color: #ff2400 !important;
-}
-
-.lead {
-  font-size: 1.15rem !important;
-}
-
 

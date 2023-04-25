@@ -1,17 +1,53 @@
-<<<<<<<Updatedupstream<headerclass="p-3text-bg-dark">=======<headerclass="p-1text-bg-darksticky-top">>>>>>>> Stashed changes
+<header class="p-1 text-bg-dark sticky-top">
 
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg justify-content-center">
+	<nav class="navbar navbar-dark bg-dark navbar-expand-lg justify-content-center">
 
-	<<<<<<<Updatedupstream<divclass="container-fluid"><aclass="navbar-brandtext-white"href="{{path('home')}}">Quaiantique</a>=======<divclass="container-fluidd-flex"><aclass="navbar-brandtext-whitecastorofs-2"href="{{path('home')}}">Quaiantique</a>>>>>>>> Stashed changes
+		<div class="container-fluid d-flex">
+			<a class="navbar-brand text-white castoro fs-2" href="{{ path('home') }}">Quai antique</a>
 
-	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-	<div class="collapse navbar-collapse" id="navbarToggler">
+			<div class="collapse navbar-collapse" id="navbarToggler">
 
-		<<<<<<<Updatedupstream<ulclass="navbar-navme-automb-2mb-lg-0"><liclass="nav-item"><aclass="nav-linkactivetext-white"aria-current="page"href="{{path('home')}}">Accueil</a></li><liclass="nav-item"><aclass="nav-linktext-white"href="#">Lacarte</a></li><liclass="nav-item"><aclass="nav-linktext-white"href="{{path('reservation')}}">Réservation</a></li></ul><divclass="d-flex"><divclass="dropdown"><aclass="nav-linkdropdown-toggle"data-bs-toggle="dropdown"href="#"role="button"aria-haspopup="true"aria-expanded="false">Bonjour{{app.user.firstName}}</a><divclass="dropdown-menudropdown-menu-darkdropdown-menu-startdropdown-menu-sm-end"><aclass="dropdown-item"href="{{path('user.edit',{id:app.user.id})}}">Modifiermesinformations</a><aclass="dropdown-item"href="{{path('user.edit.password',{id:app.user.id})}}">Modifiermonmotdepasse</a><divclass="dropdown-divider"></div><aclass="dropdown-item"href="{{path('admin.index')}}">Administration</a><divclass="dropdown-divider"></div><aclass="dropdown-item"href="{{path('security.logout')}}">Déconnexion</a></div></div><ahref="{{path('security.registration')}}"class="btnbtn-outline-lightme-2"role="button">S'inscrire</a><arole="button"class="btnbtn-danger"href="{{path('security.login')}}">Connexion</a>{%endif%}</div>=======<ulclass="navbar-navmb-2mx-automb-lg-0lexendfs-6"><liclass="nav-item"><aclass="nav-linktext-white"aria-current="page"href="{{path('home')}}">Accueil</a></li><liclass="nav-item"><aclass="nav-linktext-white"href="{{path('menu')}}">Lacarte</a></li><liclass="nav-item"><aclass="nav-linktext-white"href="{{path('reservation')}}">Réservation</a></li></ul><divclass="d-flexlexend">{%ifapp.user%}<divclass="dropdown"><aclass="nav-linkdropdown-toggle"data-bs-toggle="dropdown"href="#"role="button"aria-haspopup="true"aria-expanded="false">Bonjour{{app.user.firstName}}</a><divclass="dropdown-menudropdown-menu-darkdropdown-menu-startdropdown-menu-sm-end"><aclass="dropdown-item"href="{{path('user.edit',{id:app.user.id})}}">Modifiermesinformations</a><aclass="dropdown-item"href="{{path('user.edit.password',{id:app.user.id})}}">Modifiermonmotdepasse</a><divclass="dropdown-divider"></div>{%if'ROLE_ADMIN'inapp.user.roles%}<aclass="dropdown-item"href="{{path('admin.index')}}">Administration</a><divclass="dropdown-divider"></div>{%endif%}<aclass="dropdown-item"href="{{path('security.logout')}}">Déconnexion</a></div></div>{%else%}<arole="button"class="btnbtn-outline-lightme-2"href="{{path('security.login')}}">Connexion</a><ahref="{{path('security.registration')}}"class="btnbtn-danger"role="button">S'inscrire</a></div>>> {% if app.user %} {% if 'ROLE_ADMIN' in app.user.roles %} {% endif %} {% else %} {% endif %}>>>>> Stashed changes
+				<ul class="navbar-nav mb-2 mx-auto mb-lg-0 lexend fs-6">
+					<li class="nav-item">
+						<a class="nav-link text-white" aria-current="page" href="{{ path('home') }}">Accueil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-white" href="{{ path('menu') }}">La carte</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-white" href="{{ path('reservation') }}">Réservation</a>
+					</li>
+				</ul>
 
-	</div>
+				<div class="d-flex lexend">
+					{% if app.user %}
+						<div class="dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bonjour
+								{{ app.user.firstName }}</a>
+							<div class="dropdown-menu dropdown-menu-dark dropdown-menu-start dropdown-menu-sm-end">
+								<a class="dropdown-item" href="{{ path('user.edit', {id : app.user.id}) }}">Modifier mes informations</a>
+								<a class="dropdown-item" href="{{ path('user.edit.password', {id : app.user.id}) }}">Modifier mon mot de passe</a>
+								<div class="dropdown-divider"></div>
+								{% if 'ROLE_ADMIN' in app.user.roles %}
+									<a class="dropdown-item" href="{{ path('admin.index') }}">Administration</a>
+									<div class="dropdown-divider"></div>
+								{% endif %}
+								<a class="dropdown-item" href="{{ path('security.logout') }}">Déconnexion</a>
+							</div>
+						</div>
+					{% else %}
+						<a role="button" class="btn btn-outline-light me-2" href="{{ path('security.login') }}">Connexion</a>
+						<a href="{{ path('security.registration') }}" class="btn btn-danger" role="button">S'inscrire</a>
+					{% endif %}
+				</div>
 
-</div></nav></header>
+			</div>
+
+		</div>
+	</nav>
+
+</header>
