@@ -21,7 +21,6 @@ const tooltipTriggerList = document.querySelectorAll(
 const tooltipList = [...tooltipTriggerList].map(
   (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
 );
-console.log(tooltipList);
 
 items.forEach((item, idx) => {
   item.addEventListener("click", () => {
