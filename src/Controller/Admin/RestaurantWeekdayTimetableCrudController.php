@@ -3,12 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\RestaurantWeekdayTimetable;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 
 class RestaurantWeekdayTimetableCrudController extends AbstractCrudController
@@ -34,6 +35,7 @@ class RestaurantWeekdayTimetableCrudController extends AbstractCrudController
             TimeField::new('closeam', 'Fermeture matin'),
             TimeField::new('openpm', 'Ouverture soir'),
             TimeField::new('closepm', 'fermeture soir'),
+            BooleanField::new('isclosed')
         ];
     }
     public function configureActions(Actions $actions): Actions

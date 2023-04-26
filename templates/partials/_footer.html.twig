@@ -40,13 +40,19 @@
 							</div>
 							<div class="col-6 d-flex justify-content-around flex-column">
 								{% for index in time %}
-									<p class="lexend">{{ index.openam | format_time('short') }}
-										-
-										{{index.closeam | format_time('short') }}
-										/
-										{{ index.openpm | format_time('short') }}
-										-
-										{{ index.closepm | format_time('short') }}</p>
+									{% if index.isclosed %}
+										<p class="lexend">Fermé</p>
+									{% else %}
+										<p class="lexend">{{ index.openam | format_time('short') }}
+											-
+											{{index.closeam | format_time('short') }}
+											/
+											{{ index.openpm | format_time('short') }}
+											-
+											{{ index.closepm | format_time('short') }}</p>
+									{% endif %}
+
+
 								{% endfor %}
 							</div>
 						</div>

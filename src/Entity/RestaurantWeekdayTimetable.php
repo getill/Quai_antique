@@ -31,6 +31,9 @@ class RestaurantWeekdayTimetable
     #[ORM\JoinColumn(nullable: false)]
     private ?RestaurantWeekday $weekday_id = null;
 
+    #[ORM\Column]
+    private ?bool $isClosed = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +99,18 @@ class RestaurantWeekdayTimetable
     public function setIdWeekday(RestaurantWeekday $weekday_id): self
     {
         $this->weekday_id = $weekday_id;
+
+        return $this;
+    }
+
+    public function isIsClosed(): ?bool
+    {
+        return $this->isClosed;
+    }
+
+    public function setIsClosed(bool $isClosed): self
+    {
+        $this->isClosed = $isClosed;
 
         return $this;
     }
