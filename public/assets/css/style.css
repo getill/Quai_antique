@@ -28,12 +28,13 @@ p{
   font-family: 'Arvo', sans-serif;
 }
 
-header {
-  background-color: #21252963 !important;
+header, nav {
+  background: rgb(20,20,20) !important;
+  background: linear-gradient(180deg, rgba(20,20,20,1) 10%, rgba(0,212,255,0) 100%) !important;
 }
 
 .img{
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
 }
 

@@ -13,7 +13,111 @@ import "./bootstrap";
 
 console.log("🔪 GET ILL.");
 
-var items = document.querySelectorAll(".nav-link");
+//------------- Anime JS ------------------
+
+import anime from "animejs/lib/anime.es.js";
+
+//-------------------- Element selectors --------------------
+
+const introT = document.querySelector(".introT");
+const menuTitle = document.querySelector(".menuTitle");
+const menu1 = document.querySelector(".menu1");
+const menu2 = document.querySelector(".menu2");
+
+//------------- Animations ----------------
+
+anime({
+  targets: ".introT",
+  opacity: [0, 1],
+  duration: 10000,
+  delay: 1500,
+});
+
+anime({
+  targets: ".logo",
+  opacity: [0, 1],
+  translateY: [-50, 0],
+  easing: "easeInOutExpo",
+  delay: 100,
+});
+
+anime({
+  targets: ".nav1",
+  opacity: [0, 1],
+  translateY: [-50, 0],
+  easing: "easeInOutExpo",
+  delay: 500,
+});
+
+anime({
+  targets: ".nav2",
+  opacity: [0, 1],
+  translateY: [-50, 0],
+  easing: "easeInOutExpo",
+  delay: 600,
+});
+
+anime({
+  targets: ".nav3",
+  opacity: [0, 1],
+  translateY: [-50, 0],
+  easing: "easeInOutExpo",
+  delay: 700,
+});
+
+anime({
+  targets: ".login",
+  opacity: [0, 1],
+  translateY: [-50, 0],
+  easing: "easeInOutExpo",
+  delay: 1000,
+});
+
+const selection = anime({
+  targets: ".selection",
+  opacity: [0, 1],
+  autoplay: false,
+});
+
+const menuTitleAnime = anime({
+  targets: ".menuTitle",
+  opacity: [0, 1],
+  translateY: [-50, 0],
+  easing: "easeInOutExpo",
+  autoplay: false,
+});
+
+const menu1Anime = anime({
+  targets: ".menu1",
+  opacity: [0, 1],
+  easing: "easeInOutExpo",
+});
+
+const menu2Anime = anime({
+  targets: ".menu2",
+  opacity: [0, 1],
+  easing: "easeInOutExpo",
+});
+
+//--------------------- Scroll logic ---------------------------------
+
+const animateOnScroll = function (div, speed = 100, offset = 0) {
+  const scrollPercent = window.scrollY - div.offsetTop;
+  return (scrollPercent + offset) / speed;
+};
+
+//---------------------------- Animation trigger ---------------------------
+
+window.onscroll = function () {
+  selection.seek(animateOnScroll(introT, 2000, 300) * selection.duration);
+  menuTitleAnime.seek(
+    animateOnScroll(menuTitle, 1000, 1300) * menuTitleAnime.duration
+  );
+  menu1Anime.seek(animateOnScroll(menu1, 1000, 1200) * menu1Anime.duration);
+  menu2Anime.seek(animateOnScroll(menu2, 1000, 1200) * menu2Anime.duration);
+};
+
+//---------------- Tooltip ---------------------------------------
 
 const tooltipTriggerList = document.querySelectorAll(
   '[data-bs-toggle="tooltip"]'
@@ -22,22 +126,23 @@ const tooltipList = [...tooltipTriggerList].map(
   (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
 );
 
-items.forEach((item, idx) => {
-  item.addEventListener("click", () => {
-    ToggleActive(item, idx);
-  });
-});
+// items.forEach((item, idx) => {
+//   item.addEventListener("click", () => {
+//     ToggleActive(item, idx);
+//   });
+// });
 
-function ToggleActive(el, index) {
-  el.classList.toggle("active");
-  items.forEach((item, idx) => {
-    if (idx !== index) {
-      item.classList.remove("active");
-    }
-  });
-}
+// function ToggleActive(el, index) {
+//   el.classList.toggle("active");
+//   items.forEach((item, idx) => {
+//     if (idx !== index) {
+//       item.classList.remove("active");
+//     }
+//   });
+// }
 
-// Easepick
+//-------------------------------------- Easepick ----------------------------------
+
 const picker = new easepick.create({
   element: ".datepicker",
   css: ["https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css"],
@@ -59,6 +164,8 @@ const picker = new easepick.create({
   },
   plugins: ["AmpPlugin", "LockPlugin"],
 });
+
+//-------------------------- On load events ------------------------------------
 
 window.onload = () => {
   // QueryString creation

@@ -21,6 +21,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "animejs": "^3.2.1",
         "jquery-datetimepicker": "^2.5.21"
     },
     "engines": {

@@ -1,9 +1,9 @@
-<header class="p-1 text-bg-dark sticky-top">
+<header class="text-bg-dark bg-transparent sticky-top w-100 position-absolute header">
 
-	<nav class="navbar navbar-dark bg-dark navbar-expand-lg justify-content-center">
+	<nav class="navbar navbar-dark bg-transparent d-flex justify-content-between navbar-expand-lg">
 
-		<div class="container-fluid d-flex">
-			<a class="navbar-brand text-white castoro fs-2" href="{{ path('home') }}">Quai antique</a>
+		<div class="container-fluid justify-content-between">
+			<a class="navbar-brand text-white castoro fs-2 logo" href="{{ path('home') }}">Quai antique</a>
 
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -13,17 +13,17 @@
 
 				<ul class="navbar-nav mb-2 mx-auto mb-lg-0 lexend fs-6">
 					<li class="nav-item">
-						<a class="nav-link text-white" aria-current="page" href="{{ path('home') }}">Accueil</a>
+						<a class="nav-link text-white nav1" aria-current="page" href="{{ path('home') }}">Accueil</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-white" href="{{ path('menu') }}">La carte</a>
+						<a class="nav-link text-white nav2" href="{{ path('menu') }}">La carte</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-white" href="{{ path('reservation') }}">Réservation</a>
+						<a class="nav-link text-white nav3" href="{{ path('reservation') }}">Réservation</a>
 					</li>
 				</ul>
 
-				<div class="d-flex lexend">
+				<div class="d-flex lexend login">
 					{% if app.user %}
 						<div class="dropdown">
 							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bonjour
