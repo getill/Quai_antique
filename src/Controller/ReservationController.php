@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,64 +22,50 @@ class ReservationController extends AbstractController
         $form = $this->createForm(ReservationType::class);
         $form->handleRequest($request);
 
-        // Get date
+        //------ Get date
         $date = $request->get("date");
         // dd($date);
+
+        //------------------------ Booked Time Array --------------------------------
+
+        $bookedTime = $reservationrepository->findAll();
+
+        foreach ($bookedTime as &$value) {
+            $value = $value->getDateTime()->getTimestamp();
+        }
+        unset($value);
+
+        //--------------- AJAX request verification -----------------------------
+
+        $result = null;
 
         //------------- Time creation logic ------------------
 
         $createdTime = array();
         $openAm = $timeRepository->find('1')->getOpenAm()->getTimestamp();
         $closeAm = $timeRepository->find('1')->getCloseAm()->getTimestamp() - 3600; // Close Am - 1 hour
-        // dd($closeAm);
-        $fifteen_mins  = 15 * 60;
+        $fifteen_mins  = 15 * 60; // Time interval
 
         while ($openAm <= $closeAm) {
-            $createdTime[] = date("H:i", $openAm);
+            if ($date == null) {
+                $createdTime[] = date("H:i", $openAm); // AJAX + Open hours concateniation 
+            } else {
+                $dayData = $date . ' ' . date("H:i", $openAm); // AJAX + Open hours concateniation 
+                $createdTime[] = DateTime::createFromFormat("d/m/Y H:i", $dayData)->getTimestamp(); // Array storing + Timestamp conversion
+            }
             $openAm += $fifteen_mins;
         }
 
-        //-------------- transorm every booked datetime into timestamp ------------
-
-
-        //---- Booked Time Array 
-
-        $bookedTime = $reservationrepository->findAll();
-
-        foreach ($bookedTime as &$value) {
-            $value = $value->getDateTime()->getTimestamp();
-            $value = date("H:i", $value);
+        //-------------- Compare [created time] and [booked times] -----------------------
+        if ($date == null) {
+            $result = $createdTime;
+        } else {
+            $result = array_diff($createdTime, $bookedTime);
         }
         unset($value);
-        // dd($bookedTime);
 
-
-
-
-        //-------------- Compare [created time] and [booked times] -----------------------
-
-        // print_r($result);
-
-
-
-        //--------------- AJAX request verification -----------------------------
-
-        $bookedDate = $reservationrepository->findAll();
-        $result = null;
-        // dd($value, $date);
         if ($request->get('ajax')) {
 
-            //----- Booked Date Array
-
-            foreach ($bookedDate as &$value) {
-                $value = $value->getDateTime()->getTimestamp();
-                $value = date("d/m/Y", $value);
-                $result = array_search($date, $bookedDate);
-            }
-            // dd($bookedDate);
-            dd($result);
-            // dd($bookedDate, $date);
-            unset($value);
             return new JsonResponse([
                 'content' => $this->renderView('partials/_reservationButtons.html.twig', [
                     'date' => $date,
@@ -92,7 +79,7 @@ class ReservationController extends AbstractController
             ]);
         }
 
-        $result = array_diff($createdTime, $bookedTime);
+        // dd($result);
 
         return $this->render('pages/reservation.html.twig', [
             'date' => $date,
