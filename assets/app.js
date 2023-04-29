@@ -174,7 +174,7 @@ window.onload = () => {
   // Functions to execute when selected
   picker.on("select", () => {
     let pickerDate = picker.getDate();
-    params.set("date", pickerDate.toLocaleDateString("fr"));
+    params.set("date", pickerDate.toLocaleDateString("en"));
 
     //Get active URL
     const Url = new URL(window.location.href);

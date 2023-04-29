@@ -24,7 +24,6 @@ class ReservationController extends AbstractController
 
         //------ Get date
         $date = $request->get("date");
-        // dd($date);
 
         //------------------------ Booked Time Array --------------------------------
 
@@ -35,15 +34,35 @@ class ReservationController extends AbstractController
         }
         unset($value);
 
-        //--------------- AJAX request verification -----------------------------
-
         $result = null;
 
         //------------- Time creation logic ------------------
 
+        //-------- Selected day condition
+        $d = 1; // Day ID on database
+        $intdate = strtotime($date); // AJAX date to timestamp 
+        $dayOfWeek = date("D", $intdate); // Get the day "mon, tue, wen...."
+
+        if ($dayOfWeek == "Mon") {
+            $d = 1;
+        } elseif ($dayOfWeek == "Tue") {
+            $d = 2;
+        } elseif ($dayOfWeek == "Wed") {
+            $d = 3;
+        } elseif ($dayOfWeek == "Thu") {
+            $d = 4;
+        } elseif ($dayOfWeek == "Fri") {
+            $d = 5;
+        } elseif ($dayOfWeek == "Sat") {
+            $d = 6;
+        } elseif ($dayOfWeek == "Sun") {
+            $d = 7;
+        }
+
+        //----------------- Creation of time based on selected day
         $createdTime = array();
-        $openAm = $timeRepository->find('1')->getOpenAm()->getTimestamp();
-        $closeAm = $timeRepository->find('1')->getCloseAm()->getTimestamp() - 3600; // Close Am - 1 hour
+        $openAm = $timeRepository->find($d)->getOpenAm()->getTimestamp();
+        $closeAm = $timeRepository->find($d)->getCloseAm()->getTimestamp() - 3600; // Close Am - 1 hour
         $fifteen_mins  = 15 * 60; // Time interval
 
         while ($openAm <= $closeAm) {
@@ -57,12 +76,15 @@ class ReservationController extends AbstractController
         }
 
         //-------------- Compare [created time] and [booked times] -----------------------
+
         if ($date == null) {
             $result = $createdTime;
         } else {
             $result = array_diff($createdTime, $bookedTime);
         }
         unset($value);
+
+        //--------------- AJAX request verification -----------------------------
 
         if ($request->get('ajax')) {
 
