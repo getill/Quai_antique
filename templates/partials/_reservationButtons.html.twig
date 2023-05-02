@@ -1,8 +1,24 @@
-<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
+<h2>Midi</h2>
 
-	{% for reservation in availableDate %}
+<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
+	<div class="js-day" {% for index in time %} data-is-open="{{ index.isclosed ? 'false' : 'true' }}" {% endfor %}></div>
+	{% for reservation in availableDateAm %}
 
 		<li class="mx-1 my-1">
+			<a class="btn btn-danger lexend">{{ reservation | date("H:i")}}</a>
+		</li>
+
+	{% endfor %}
+</ul>
+
+<hr class="mt-5">
+
+<h2 class="mt-1">Soir</h2>
+
+<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
+	{% for reservation in availableDatePm %}
+
+		<li class="mx-1 mt-1 my-1">
 			<a class="btn btn-danger lexend">{{ reservation | date("H:i")}}</a>
 		</li>
 

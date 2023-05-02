@@ -21,28 +21,9 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 class ReservationType extends AbstractType
 {
 
-    // public function buildView(FormView $view, FormInterface $form, $options): void
-    // {
-    //     $view->vars['available_times'] = $this->getAvailableTimes($options['date']);
-    // }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('date_time', DateType::class, [
-            //     // 'class' => Reservation::class,
-            //     // 'html5' => false,
-            //     'row_attr' => [
-            //         'class' => 'my-5',
-            //     ],
-            //     'placeholder' => [
-            //         'month' => 'Mois', 'day' => 'Jour',
-            //     ],
-            //     'attr' => [
-            //         'class' => 'form-label'
-            //     ],
-            //     'label' => 'Date et heure de réservation'
-            // ])
             ->add('nb_people', IntegerType::class, [
                 'row_attr' => [
                     'class' => 'form-floating my-5',
@@ -67,30 +48,7 @@ class ReservationType extends AbstractType
                 ],
                 'label' => 'Réserver'
             ]);
-
-        // $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-        //     $form = $event->getForm();
-        //     $data = $event->getData();
-
-        //     $date_time = $data->;
-        //     $disponibility = null === $date_time ? [] : $date_time;
-
-        //     $form->add('Horaires disponibles:', EntityType::class, [
-        //         'class' => Horaires::class,
-        //         'placeholder' => '',
-        //         'choices' => $disponibility,
-        //     ]);
-        // });
-
     }
-
-    // private function getAvailableTimes($date)
-    // {
-    //     // Récupérer les horaires disponibles pour la date spécifiée
-    //     // et retourner un tableau d'options pour le champ de formulaire
-    //     $availableTimes = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
-    //     return array_combine($availableTimes, $availableTimes);
-    // }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

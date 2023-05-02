@@ -12,8 +12,8 @@
 
 	<div class="d-flex flex-column align-items-center justify-content-center container bg-light text-black rounded my-5 w-75">
 
-		{% for message in app.flashes('warning') %}
-			<div class="alert alert-warning mt-5 mb-0">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-5 mb-0">
 				{{ message }}
 			</div>
 		{% endfor %}
@@ -31,7 +31,7 @@
 						{% set value = "" %}
 					{% endif %}
 
-					<input class="form-control datepicker" id="floatingInputDate" placeholder="Choisir une date" value={{value}}/>
+					<input class="form-control datepicker date" id="floatingInputDate" placeholder="Choisir une date" value={{value}}/>
 					<label for="floatingInputDate">Choisir une date</label>
 				</div>
 			</div>

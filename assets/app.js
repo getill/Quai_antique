@@ -126,23 +126,8 @@ const tooltipList = [...tooltipTriggerList].map(
   (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
 );
 
-// items.forEach((item, idx) => {
-//   item.addEventListener("click", () => {
-//     ToggleActive(item, idx);
-//   });
-// });
-
-// function ToggleActive(el, index) {
-//   el.classList.toggle("active");
-//   items.forEach((item, idx) => {
-//     if (idx !== index) {
-//       item.classList.remove("active");
-//     }
-//   });
-// }
-
 //-------------------------------------- Easepick ----------------------------------
-
+const DaysOff = [];
 const picker = new easepick.create({
   element: ".datepicker",
   css: ["https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css"],
@@ -161,6 +146,9 @@ const picker = new easepick.create({
     minDate: new Date(),
     minDays: null,
     maxDays: null,
+    filter(date, picked) {
+      return DaysOff.includes(date.format("YYYY-MM-DD"));
+    },
   },
   plugins: ["AmpPlugin", "LockPlugin"],
 });
@@ -199,3 +187,8 @@ window.onload = () => {
       .catch((e) => alert(e));
   });
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+  let day = document.querySelector(".js-day");
+  let dayStatus = day.dataset.isOpen;
+});

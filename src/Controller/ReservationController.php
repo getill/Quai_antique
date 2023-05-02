@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\Reservation;
 use App\Form\ReservationType;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +18,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'reservation')]
-    public function reservation(RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $reservationrepository): Response
+    public function reservation(EntityManagerInterface $manager, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $reservationrepository): Response
     {
-
+        $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reservation = $form->getData();
+
+            $this->addFlash(
+                'success',
+                'Votre réservation a bien été prise en compte!'
+            );
+
+            $manager->persist($reservation);
+            $manager->flush();
+        }
+
         $form->handleRequest($request);
 
         //------ Get date
@@ -33,8 +49,6 @@ class ReservationController extends AbstractController
             $value = $value->getDateTime()->getTimestamp();
         }
         unset($value);
-
-        $result = null;
 
         //------------- Time creation logic ------------------
 
@@ -60,27 +74,47 @@ class ReservationController extends AbstractController
         }
 
         //----------------- Creation of time based on selected day
-        $createdTime = array();
+        $createdTimeAm = array();
+        $createdTimePm = array();
+
         $openAm = $timeRepository->find($d)->getOpenAm()->getTimestamp();
         $closeAm = $timeRepository->find($d)->getCloseAm()->getTimestamp() - 3600; // Close Am - 1 hour
+
+        $openPm = $timeRepository->find($d)->getOpenPm()->getTimestamp();
+        $closePm = $timeRepository->find($d)->getClosePm()->getTimestamp() - 3600; // Close Am - 1 hour
+
         $fifteen_mins  = 15 * 60; // Time interval
 
         while ($openAm <= $closeAm) {
             if ($date == null) {
-                $createdTime[] = date("H:i", $openAm); // AJAX + Open hours concateniation 
+                $createdTimeAm[] = date("H:i", $openAm); // AJAX + Open hours concateniation 
             } else {
-                $dayData = $date . ' ' . date("H:i", $openAm); // AJAX + Open hours concateniation 
-                $createdTime[] = DateTime::createFromFormat("d/m/Y H:i", $dayData)->getTimestamp(); // Array storing + Timestamp conversion
+                $dayDataAm = $date . ' ' . date("H:i", $openAm); // AJAX + Open hours concateniation 
+                $createdTimeAm[] = DateTime::createFromFormat("d/m/Y H:i", $dayDataAm)->getTimestamp(); // Array storing + Timestamp conversion
             }
             $openAm += $fifteen_mins;
         }
 
+        while ($openPm <= $closePm) {
+            if ($date == null) {
+                $createdTimePm[] = date("H:i", $openPm); // AJAX + Open hours concateniation 
+            } else {
+                $dayDataPm = $date . ' ' . date("H:i", $openPm); // AJAX + Open hours concateniation 
+                $createdTimePm[] = DateTime::createFromFormat("d/m/Y H:i", $dayDataPm)->getTimestamp(); // Array storing + Timestamp conversion
+            }
+            $openPm += $fifteen_mins;
+        }
+
         //-------------- Compare [created time] and [booked times] -----------------------
+        $resultAm = null;
+        $resultPm = null;
 
         if ($date == null) {
-            $result = $createdTime;
+            $resultAm = $createdTimeAm;
+            $resultPm = $createdTimePm;
         } else {
-            $result = array_diff($createdTime, $bookedTime);
+            $resultAm = array_diff($createdTimeAm, $bookedTime);
+            $resultPm = array_diff($createdTimePm, $bookedTime);
         }
         unset($value);
 
@@ -95,7 +129,8 @@ class ReservationController extends AbstractController
                     'weekdays' => $dayRepository->findAll(),
                     'form' => $form->createView(),
                     'reservationDateTime' => $reservationrepository->findAll(),
-                    'availableDate' => $result
+                    'availableDateAm' => $resultAm,
+                    'availableDatePm' => $resultPm,
                 ])
 
             ]);
@@ -109,7 +144,8 @@ class ReservationController extends AbstractController
             'weekdays' => $dayRepository->findAll(),
             'form' => $form->createView(),
             'reservationDateTime' => $reservationrepository->findAll(),
-            'availableDate' => $result
+            'availableDateAm' => $resultAm,
+            'availableDatePm' => $resultPm,
         ]);
     }
 }
