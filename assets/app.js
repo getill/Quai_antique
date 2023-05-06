@@ -186,14 +186,13 @@ picker.on("select", () => {
       history.pushState({}, null, Url.pathname + "?" + params.toString());
     })
     .catch((e) => alert(e));
-  console.log(time);
 });
 
 // Functions to execute when time is selected
-$("#content").on("click", "#timeBtn", () => {
+$("#content").on("click", "#timeBtn", (e) => {
   let pickerDate = picker.getDate();
   let date = pickerDate.toLocaleDateString("en");
-  time = this.textContent;
+  time = e.target.textContent;
 
   // QueryString creation
   const params = new URLSearchParams();
