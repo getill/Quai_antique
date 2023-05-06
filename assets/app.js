@@ -16,6 +16,7 @@ console.log("🔪 GET ILL.");
 //------------- Anime JS ------------------
 
 import anime from "animejs/lib/anime.es.js";
+import $ from "jquery/dist/jquery";
 
 //-------------------- Element selectors --------------------
 
@@ -153,42 +154,79 @@ const picker = new easepick.create({
   plugins: ["AmpPlugin", "LockPlugin"],
 });
 
-//-------------------------- On load events ------------------------------------
+let time;
+// Functions to execute when date is selected
+picker.on("select", () => {
+  let pickerDate = picker.getDate();
+  let date = pickerDate.toLocaleDateString("en");
+  time = "00:00";
 
-window.onload = () => {
   // QueryString creation
   const params = new URLSearchParams();
 
-  // Functions to execute when selected
-  picker.on("select", () => {
-    let pickerDate = picker.getDate();
-    params.set("date", pickerDate.toLocaleDateString("en"));
+  params.set("dateTime", date + time);
+  //Get active URL
+  const Url = new URL(window.location.href);
 
-    //Get active URL
-    const Url = new URL(window.location.href);
+  // AJAX request
+  fetch(Url.pathname + "?" + params.toString() + "&ajax=1", {
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Get content
+      const content = document.querySelector("#content");
 
-    // AJAX request
-    fetch(Url.pathname + "?" + params.toString() + "&ajax=1", {
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-      },
+      // Content replacement
+      content.innerHTML = data.content;
+
+      // URL Update
+      history.pushState({}, null, Url.pathname + "?" + params.toString());
     })
-      .then((response) => response.json())
-      .then((data) => {
-        // Get content
-        const content = document.querySelector("#content");
-
-        // Content replacement
-        content.innerHTML = data.content;
-
-        // URL Update
-        history.pushState({}, null, Url.pathname + "?" + params.toString());
-      })
-      .catch((e) => alert(e));
-  });
-};
-
-document.addEventListener("DOMContentLoaded", function () {
-  let day = document.querySelector(".js-day");
-  let dayStatus = day.dataset.isOpen;
+    .catch((e) => alert(e));
+  console.log(time);
 });
+
+// Functions to execute when time is selected
+$("#content").on("click", "#timeBtn", () => {
+  let pickerDate = picker.getDate();
+  let date = pickerDate.toLocaleDateString("en");
+  time = this.textContent;
+
+  // QueryString creation
+  const params = new URLSearchParams();
+
+  params.set("dateTime", date + time);
+  //Get active URL
+  const Url = new URL(window.location.href);
+
+  // AJAX request
+  fetch(Url.pathname + "?" + params.toString() + "&ajax=1", {
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Get content
+      const content = document.querySelector("#content");
+
+      // Content replacement
+      content.innerHTML = data.content;
+
+      // URL Update
+      history.pushState({}, null, Url.pathname + "?" + params.toString());
+    })
+    .catch((e) => alert(e));
+});
+
+// function ajaxRequest() {}
+
+//-------------------------- On load events ------------------------------------
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   let day = document.querySelector(".js-day");
+//   let dayStatus = day.dataset.isOpen;
+// });

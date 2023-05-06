@@ -20,12 +20,19 @@ class ReservationController extends AbstractController
     #[Route('/reservation', name: 'reservation')]
     public function reservation(EntityManagerInterface $manager, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $reservationrepository): Response
     {
+        //------ Get date
+        $dateTime = $request->get("dateTime");
+        $date = substr($dateTime, 0, -5);
+        $dateTimeConverted = DateTime::createFromFormat("m/d/Y H:i", $dateTime);
+
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class);
+        // $selectedDate = new DateTime('now');
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $reservation = $form->getData();
+            $reservation->setDateTime($dateTimeConverted);
 
             $this->addFlash(
                 'success',
@@ -38,8 +45,7 @@ class ReservationController extends AbstractController
 
         $form->handleRequest($request);
 
-        //------ Get date
-        $date = $request->get("date");
+
 
         //------------------------ Booked Time Array --------------------------------
 
@@ -90,7 +96,7 @@ class ReservationController extends AbstractController
                 $createdTimeAm[] = date("H:i", $openAm); // AJAX + Open hours concateniation 
             } else {
                 $dayDataAm = $date . ' ' . date("H:i", $openAm); // AJAX + Open hours concateniation 
-                $createdTimeAm[] = DateTime::createFromFormat("d/m/Y H:i", $dayDataAm)->getTimestamp(); // Array storing + Timestamp conversion
+                $createdTimeAm[] = DateTime::createFromFormat("m/d/Y H:i", $dayDataAm)->getTimestamp(); // Array storing + Timestamp conversion
             }
             $openAm += $fifteen_mins;
         }
@@ -100,7 +106,7 @@ class ReservationController extends AbstractController
                 $createdTimePm[] = date("H:i", $openPm); // AJAX + Open hours concateniation 
             } else {
                 $dayDataPm = $date . ' ' . date("H:i", $openPm); // AJAX + Open hours concateniation 
-                $createdTimePm[] = DateTime::createFromFormat("d/m/Y H:i", $dayDataPm)->getTimestamp(); // Array storing + Timestamp conversion
+                $createdTimePm[] = DateTime::createFromFormat("m/d/Y H:i", $dayDataPm)->getTimestamp(); // Array storing + Timestamp conversion
             }
             $openPm += $fifteen_mins;
         }
@@ -135,8 +141,6 @@ class ReservationController extends AbstractController
 
             ]);
         }
-
-        // dd($result);
 
         return $this->render('pages/reservation.html.twig', [
             'date' => $date,
