@@ -23,7 +23,11 @@ class ReservationController extends AbstractController
         //------ Get date
         $dateTime = $request->get("dateTime");
         $date = substr($dateTime, 0, -5);
+        $selectedTime = substr($dateTime, -5);
+        // dd($getTime);
         $dateTimeConverted = DateTime::createFromFormat("m/d/Y H:i", $dateTime);
+
+        //------------------------- Form logic ------------------------
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class);
@@ -42,10 +46,6 @@ class ReservationController extends AbstractController
             $manager->persist($reservation);
             $manager->flush();
         }
-
-        $form->handleRequest($request);
-
-
 
         //------------------------ Booked Time Array --------------------------------
 
@@ -92,7 +92,7 @@ class ReservationController extends AbstractController
         $fifteen_mins  = 15 * 60; // Time interval
 
         while ($openAm <= $closeAm) {
-            if ($date == null) {
+            if ($dateTime == null) {
                 $createdTimeAm[] = date("H:i", $openAm); // AJAX + Open hours concateniation 
             } else {
                 $dayDataAm = $date . ' ' . date("H:i", $openAm); // AJAX + Open hours concateniation 
@@ -102,7 +102,7 @@ class ReservationController extends AbstractController
         }
 
         while ($openPm <= $closePm) {
-            if ($date == null) {
+            if ($dateTime == null) {
                 $createdTimePm[] = date("H:i", $openPm); // AJAX + Open hours concateniation 
             } else {
                 $dayDataPm = $date . ' ' . date("H:i", $openPm); // AJAX + Open hours concateniation 
@@ -114,15 +114,17 @@ class ReservationController extends AbstractController
         //-------------- Compare [created time] and [booked times] -----------------------
         $resultAm = null;
         $resultPm = null;
-
-        if ($date == null) {
-            $resultAm = $createdTimeAm;
-            $resultPm = $createdTimePm;
+        if ($timeRepository->find($d)->isIsClosed() == true) {
+            $resultAm = "";
+            $resultPm = "";
+        } elseif ($dateTime == null) {
+            $resultAm = "Choix";
         } else {
             $resultAm = array_diff($createdTimeAm, $bookedTime);
             $resultPm = array_diff($createdTimePm, $bookedTime);
         }
         unset($value);
+        // dd($dateTime);
 
         //--------------- AJAX request verification -----------------------------
 
@@ -131,6 +133,7 @@ class ReservationController extends AbstractController
             return new JsonResponse([
                 'content' => $this->renderView('partials/_reservationButtons.html.twig', [
                     'date' => $date,
+                    'selectedTime' => $selectedTime,
                     'time' => $timeRepository->findAll(),
                     'weekdays' => $dayRepository->findAll(),
                     'form' => $form->createView(),
@@ -145,6 +148,7 @@ class ReservationController extends AbstractController
         return $this->render('pages/reservation.html.twig', [
             'date' => $date,
             'time' => $timeRepository->findAll(),
+            'selectedTime' => $selectedTime,
             'weekdays' => $dayRepository->findAll(),
             'form' => $form->createView(),
             'reservationDateTime' => $reservationrepository->findAll(),

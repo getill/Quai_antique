@@ -41,10 +41,10 @@ class ReservationType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'row_attr' => [
-                    'class' => 'd-grid gap-2 col-xl-6 mx-auto',
+                    'class' => 'my-auto',
                 ],
                 'attr' => [
-                    'class' => 'btn btn-danger my-5'
+                    'class' => 'btn btn-danger lexend'
                 ],
                 'label' => 'Réserver'
             ]);

@@ -1,26 +1,80 @@
-<h2 class="text-center">Midi</h2>
+{% if availableDateAm == "" %}
+	<h2 class="lexend mb-5">Nous sommes désolé de vous annoncer que le réstaurant est fermé ce jour ci.
+	</h2>
 
-<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
-	<div class="js-day" {% for index in time %} data-is-open="{{ index.isclosed ? 'false' : 'true' }}" {% endfor %}></div>
-	{% for reservation in availableDateAm %}
+{% elseif availableDateAm == "Choix" %}
+	<h2 class="lexend mb-5 text-center">Veuillez choisir une date
+	</h2>
 
-		<li class="mx-1 my-1">
-			<a class="btn btn-danger lexend" id="timeBtn">{{ reservation | date("H:i")}}</a>
-		</li>
+	{{ form_row(form.submit,{ 'attr': {'class': 'btn btn-outline-danger disabled lexend d-grid gap-2 col-xl-6 mx-auto my-5'} }) }}
+{% else %}
 
-	{% endfor %}
-</ul>
+	<h2 class="text-center">Midi</h2>
 
-<hr class="mt-5">
+	<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
+		<div class="js-day" {% for index in time %} data-is-open="{{ index.isclosed ? 'false' : 'true' }}" {% endfor %}></div>
 
-<h2 class="mt-1 text-center">Soir</h2>
 
-<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
-	{% for reservation in availableDatePm %}
+		{% for reservation in availableDateAm %}
+			<li class="mx-1 my-1">
+				<a class="btn btn-outline-secondary lexend" id="timeBtn">{{ reservation | date("H:i")}}</a>
+			</li>
+		{% endfor %}
 
-		<li class="mx-1 mt-1 my-1">
-			<a class="btn btn-danger lexend" id="timeBtn">{{ reservation | date("H:i")}}</a>
-		</li>
+	</ul>
 
-	{% endfor %}
-</ul>
+	<hr class="mt-5">
+
+	<h2 class="mt-1 text-center">Soir</h2>
+
+	<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
+		{% for reservation in availableDatePm %}
+
+			<li class="mx-1 mt-1 my-1">
+				<a class="btn btn-dark lexend" id="timeBtn">{{ reservation | date("H:i")}}</a>
+			</li>
+
+		{% endfor %}
+	</ul>
+
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-outline-danger lexend d-grid gap-2 col-xl-6 mx-auto my-5" data-bs-toggle="modal" data-bs-target="#modal">
+		Confirmer
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation de la réservation</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{% if selectedTime == "00:00" or selectedTime == "" %}
+						<p class="text-center">Veuillez sélectionner un horaire</p>
+
+					{% else %}
+						<p class="text-center mt-3">
+							Réservation pour
+							{{ form.nb_people.vars.value }}
+							le
+							{{ date | date("d/m/Y") }}
+							à
+							{{ selectedTime }}
+						</p>
+
+					{% endif %}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning lexend" data-bs-dismiss="modal">Je ne suis pas sûr</button>
+
+					{{ form_row(form.submit) }}
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endif %}
