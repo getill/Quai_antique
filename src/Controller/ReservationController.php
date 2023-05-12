@@ -7,6 +7,7 @@ use App\Entity\Reservation;
 use App\Form\ReservationType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
+use App\Repository\RestaurantRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\RestaurantWeekdayRepository;
@@ -18,22 +19,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'reservation')]
-    public function reservation(EntityManagerInterface $manager, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $reservationrepository): Response
+    public function reservation(EntityManagerInterface $manager, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $reservationrepository, RestaurantRepository $restaurantRepository): Response
     {
-        //------ Get date
+        //-------------- AJAX request filtering ----------------
+
         $dateTime = $request->get("dateTime");
         $date = substr($dateTime, 0, -5);
         $selectedTime = substr($dateTime, -5);
-        // dd($getTime);
         $dateTimeConverted = DateTime::createFromFormat("m/d/Y H:i", $dateTime);
+
+
 
         //------------------------- Form logic ------------------------
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class);
-        // $selectedDate = new DateTime('now');
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $reservation = $form->getData();
             $reservation->setDateTime($dateTimeConverted);
@@ -42,10 +45,32 @@ class ReservationController extends AbstractController
                 'success',
                 'Votre réservation a bien été prise en compte!'
             );
-
             $manager->persist($reservation);
             $manager->flush();
         }
+
+        //------------------------ Max people logic --------------------------------
+
+        $maxPeople = $restaurantRepository->find(3)->getMaxPeople();
+
+        $bookedNbPeople = $reservationrepository->findAll();
+
+        $filtered_arr = array_filter(
+            $bookedNbPeople,
+            function ($obj) use ($date) {
+                $reservationDateTime = $obj->getDateTime(); // Take DateTime of every reservation
+                $stringDate = $reservationDateTime->format('n/d/Y'); // convert to string with date format to "date only"
+                return $stringDate == $date; // Filter date based on selected date
+            }
+        );
+
+        foreach ($filtered_arr as &$value) {
+            $value = $value->getNbPeople();
+        } // Get nbPeople of every reservation
+
+        $sumDay = array_sum($filtered_arr); // Sum of every nbPeople
+
+        unset($value);
 
         //------------------------ Booked Time Array --------------------------------
 
@@ -56,11 +81,10 @@ class ReservationController extends AbstractController
         }
         unset($value);
 
-        //------------- Time creation logic ------------------
+        //---------------------- Selected day condition ------------------------
 
-        //-------- Selected day condition
-        $d = 1; // Day ID on database
         $intdate = strtotime($date); // AJAX date to timestamp 
+        $d = 1; // Day ID on database
         $dayOfWeek = date("D", $intdate); // Get the day "mon, tue, wen...."
 
         if ($dayOfWeek == "Mon") {
@@ -79,7 +103,8 @@ class ReservationController extends AbstractController
             $d = 7;
         }
 
-        //----------------- Creation of time based on selected day
+        //---------------------------- Creation of time based on selected day ---------------------------------
+
         $createdTimeAm = array();
         $createdTimePm = array();
 
@@ -111,7 +136,8 @@ class ReservationController extends AbstractController
             $openPm += $fifteen_mins;
         }
 
-        //-------------- Compare [created time] and [booked times] -----------------------
+        //-------------- Display Logic -----------------------
+
         $resultAm = null;
         $resultPm = null;
         if ($timeRepository->find($d)->isIsClosed() == true) {
@@ -119,12 +145,13 @@ class ReservationController extends AbstractController
             $resultPm = "";
         } elseif ($dateTime == null) {
             $resultAm = "Choix";
-        } else {
+        } elseif ($sumDay >= $maxPeople) {
+            $resultAm = "FullDay";
+        } else { // Compare [created time] and [booked times]
             $resultAm = array_diff($createdTimeAm, $bookedTime);
             $resultPm = array_diff($createdTimePm, $bookedTime);
         }
         unset($value);
-        // dd($dateTime);
 
         //--------------- AJAX request verification -----------------------------
 

@@ -7,6 +7,14 @@
 	</h2>
 
 	{{ form_row(form.submit,{ 'attr': {'class': 'btn btn-outline-danger disabled lexend d-grid gap-2 col-xl-6 mx-auto my-5'} }) }}
+
+{% elseif availableDateAm == "FullDay" %}
+	<h2 class="lexend mb-5 text-center">Notre réstaurant a été victime de son succès !
+	</h2>
+	<p class="text-center">En clair: Il n'y a plus de place</p>
+
+	{{ form_row(form.submit,{ 'attr': {'class': 'btn btn-outline-danger disabled lexend d-grid gap-2 col-xl-6 mx-auto my-5'} }) }}
+
 {% else %}
 
 	<h2 class="text-center">Midi</h2>
