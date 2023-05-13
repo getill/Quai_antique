@@ -28,8 +28,6 @@ class ReservationController extends AbstractController
         $selectedTime = substr($dateTime, -5);
         $dateTimeConverted = DateTime::createFromFormat("m/d/Y H:i", $dateTime);
 
-
-
         //------------------------- Form logic ------------------------
 
         $reservation = new Reservation();
@@ -53,28 +51,46 @@ class ReservationController extends AbstractController
 
         $maxPeople = $restaurantRepository->find(3)->getMaxPeople();
 
-        $bookedNbPeople = $reservationrepository->findAll();
+        $bookedTime = $reservationrepository->findAll();
 
-        $filtered_arr = array_filter(
-            $bookedNbPeople,
+        $filtered_arrAM = array_filter(
+            $bookedTime,
             function ($obj) use ($date) {
                 $reservationDateTime = $obj->getDateTime(); // Take DateTime of every reservation
-                $stringDate = $reservationDateTime->format('n/d/Y'); // convert to string with date format to "date only"
-                return $stringDate == $date; // Filter date based on selected date
+                $reservationTime = $reservationDateTime->format('H:i'); // convert to string with date format to "time only"
+                if ($reservationTime <= "16:00") { // Takes every reservation below 16:00 (4pm)
+                    $stringDate = $reservationDateTime->format('n/d/Y'); // convert to string with date format to "date only"
+                    return $stringDate == $date; // Filter date based on selected date
+                }
             }
         );
 
-        foreach ($filtered_arr as &$value) {
-            $value = $value->getNbPeople();
-        } // Get nbPeople of every reservation
+        $filtered_arrPM = array_filter(
+            $bookedTime,
+            function ($obj) use ($date) {
+                $reservationDateTime = $obj->getDateTime();
+                $reservationTime = $reservationDateTime->format('H:i');
+                if ($reservationTime >= "16:00") { // Takes every reservation after 16:00 (4pm)
+                    $stringDate = $reservationDateTime->format('n/d/Y');
+                    return $stringDate == $date;
+                }
+            }
+        );
+        // dd($filtered_arrPM);
 
-        $sumDay = array_sum($filtered_arr); // Sum of every nbPeople
+        foreach ($filtered_arrAM as &$value) {
+            $value = $value->getNbPeople();
+        } // Get nbPeople of every morning reservation
+        foreach ($filtered_arrPM as &$value) {
+            $value = $value->getNbPeople();
+        } // Get nbPeople of every afternoon reservation
+
+        $sumAM = array_sum($filtered_arrAM); // Sum of every nbPeople AM
+        $sumPM = array_sum($filtered_arrPM); // Sum of every nbPeople PM
 
         unset($value);
 
         //------------------------ Booked Time Array --------------------------------
-
-        $bookedTime = $reservationrepository->findAll();
 
         foreach ($bookedTime as &$value) {
             $value = $value->getDateTime()->getTimestamp();
@@ -145,8 +161,15 @@ class ReservationController extends AbstractController
             $resultPm = "";
         } elseif ($dateTime == null) {
             $resultAm = "Choix";
-        } elseif ($sumDay >= $maxPeople) {
-            $resultAm = "FullDay";
+        } elseif ($sumAM and $sumPM >= $maxPeople) {
+            $resultAm = "FullAm";
+            $resultPm = "FullPm";
+        } elseif ($sumAM >= $maxPeople) {
+            $resultAm = "FullAm";
+            $resultPm = array_diff($createdTimePm, $bookedTime);
+        } elseif ($sumPM >= $maxPeople) {
+            $resultAm = array_diff($createdTimeAm, $bookedTime);
+            $resultPm = "FullPm";
         } else { // Compare [created time] and [booked times]
             $resultAm = array_diff($createdTimeAm, $bookedTime);
             $resultPm = array_diff($createdTimePm, $bookedTime);

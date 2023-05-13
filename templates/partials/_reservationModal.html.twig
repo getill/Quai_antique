@@ -1,0 +1,39 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-danger lexend d-grid gap-2 col-xl-6 mx-auto my-5" data-bs-toggle="modal" data-bs-target="#modal">
+	Confirmer
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation de la réservation</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{% if selectedTime == "00:00" or selectedTime == "" %}
+					<p class="text-center">Veuillez sélectionner un horaire</p>
+
+				{% else %}
+					<p class="text-center mt-3">
+						Réservation pour
+						{{ form.nb_people.vars.value }}
+						le
+						{{ date | date("d/m/Y") }}
+						à
+						{{ selectedTime }}
+					</p>
+
+				{% endif %}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-warning lexend" data-bs-dismiss="modal">Je ne suis pas sûr</button>
+
+				{{ form_row(form.submit) }}
+
+
+			</div>
+		</div>
+	</div>
+</div>

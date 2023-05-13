@@ -1,6 +1,10 @@
+{# ------------------------------------ No date selected ------------------------------------------- #}
+
 {% if availableDateAm == "" %}
 	<h2 class="lexend mb-5">Nous sommes désolé de vous annoncer que le réstaurant est fermé ce jour ci.
 	</h2>
+
+	{# -------------------------------- Date but no time selected ------------------------------------ #}
 
 {% elseif availableDateAm == "Choix" %}
 	<h2 class="lexend mb-5 text-center">Veuillez choisir une date
@@ -8,12 +12,28 @@
 
 	{{ form_row(form.submit,{ 'attr': {'class': 'btn btn-outline-danger disabled lexend d-grid gap-2 col-xl-6 mx-auto my-5'} }) }}
 
-{% elseif availableDateAm == "FullDay" %}
-	<h2 class="lexend mb-5 text-center">Notre réstaurant a été victime de son succès !
+	{# ---------------------------- Max people reached for both Am and Pm ---------------------------- #}
+
+{% elseif availableDateAm == "FullAm" and availableDatePm == "FullPm" %}
+
+	<h2 class="lexend mb-5 text-center">Notre réstaurant a été victime de son succès!
 	</h2>
-	<p class="text-center">En clair: Il n'y a plus de place</p>
 
 	{{ form_row(form.submit,{ 'attr': {'class': 'btn btn-outline-danger disabled lexend d-grid gap-2 col-xl-6 mx-auto my-5'} }) }}
+
+	{# ------------------------------ Max people reached for Am only --------------------------------- #}
+
+{% elseif availableDateAm == "FullAm" %}
+
+	{% include "partials/_reservationFullAm.html.twig" %}
+
+	{# ------------------------------- Max people reached for Pm only -------------------------------- #}
+
+{% elseif availableDatePm == "FullPm" %}
+
+	{% include "partials/_reservationFullPm.html.twig" %}
+
+	{# --------------------------------- Am and Pm time displayed ------------------------------------ #}
 
 {% else %}
 
@@ -45,44 +65,10 @@
 		{% endfor %}
 	</ul>
 
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-outline-danger lexend d-grid gap-2 col-xl-6 mx-auto my-5" data-bs-toggle="modal" data-bs-target="#modal">
-		Confirmer
-	</button>
+	{# ------------------------------------------ MODAL ---------------------------------------------- #}
 
-	<!-- Modal -->
-	<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation de la réservation</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					{% if selectedTime == "00:00" or selectedTime == "" %}
-						<p class="text-center">Veuillez sélectionner un horaire</p>
+	{% include "partials/_reservationModal.html.twig" %}
 
-					{% else %}
-						<p class="text-center mt-3">
-							Réservation pour
-							{{ form.nb_people.vars.value }}
-							le
-							{{ date | date("d/m/Y") }}
-							à
-							{{ selectedTime }}
-						</p>
-
-					{% endif %}
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-warning lexend" data-bs-dismiss="modal">Je ne suis pas sûr</button>
-
-					{{ form_row(form.submit) }}
-
-
-				</div>
-			</div>
-		</div>
-	</div>
+	{#  #}
 
 {% endif %}

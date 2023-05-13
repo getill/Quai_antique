@@ -1,0 +1,19 @@
+<h2 class="lexend mb-5 text-center">Notre réstaurant a été victime de son succès ce midi!
+</h2>
+
+<hr class="mt-5">
+
+<h2 class="mt-1 text-center">Soir</h2>
+
+<ul class="d-flex flex-wrap justify-content-center mx-auto mt-3 list-unstyled text-small">
+	{% for reservation in availableDatePm %}
+
+		<li class="mx-1 mt-1 my-1">
+			<a class="btn btn-dark lexend" id="timeBtn">{{ reservation | date("H:i")}}</a>
+		</li>
+
+	{% endfor %}
+</ul>
+
+{# MODAL #}
+{% include "partials/_reservationModal.html.twig" %}

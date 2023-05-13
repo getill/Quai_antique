@@ -26,7 +26,7 @@ class RestaurantCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IntegerField::new('max_people'),
+            IntegerField::new('max_people', 'Réservation max par service'),
         ];
     }
 
