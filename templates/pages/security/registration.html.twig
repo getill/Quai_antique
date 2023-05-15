@@ -1,18 +1,20 @@
 {% extends "base.html.twig" %}
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-{% block title %}Quai antique - Restaurant savoyard - inscription{% endblock %}
+{% block title %}Quai antique - Restaurant savoyard - inscription
+{% endblock %}
 
 {% block body %}
-  <div class="bg-dark text-white">
+	<div class="bg-dark text-white">
 
-    <h1 class="text-center bg-dark my-5">Inscription</h1>
+		<h1 class="text-center bg-dark my-5 pt-5">Inscription</h1>
 
-    <div class="d-flex justify-content-center container bg-light text-black rounded my-5 w-75 text-center">
+		<div class="d-flex justify-content-center container bg-light text-black rounded my-5 w-75 text-center">
 
-        {{ form(form, {'attr': {'style': 'width: 50vw'}} ) }}
+			{{ form(form, {'attr': {'style': 'width: 50vw'}}
+				) }}
 
-    </div>
+			</div>
 
-</div>
-{% endblock %}
+		</div>
+	{% endblock %}
