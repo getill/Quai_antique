@@ -3,23 +3,25 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\User;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Repository\RestaurantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
-use App\Repository\RestaurantRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\RestaurantWeekdayRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\RestaurantWeekdayTimetableRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'reservation')]
-    public function reservation(EntityManagerInterface $manager, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $reservationrepository, RestaurantRepository $restaurantRepository): Response
+    public function reservation(UserRepository $userRepository, EntityManagerInterface $manager, RestaurantWeekdayRepository $dayRepository, RestaurantWeekdayTimetableRepository $timeRepository, Request $request, ReservationRepository $reservationrepository, RestaurantRepository $restaurantRepository): Response
     {
         //-------------- AJAX request filtering ----------------
 
@@ -32,12 +34,18 @@ class ReservationController extends AbstractController
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class);
+        $userData = $userRepository->findBy(['id' => $this->getUser()]);
+        $pepolePref = $userData[0]->getPeoplePref();
+        $form->get('nb_people')->setData($pepolePref);
+
+
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reservation = $form->getData();
             $reservation->setDateTime($dateTimeConverted);
+            $reservation->setUser($this->getUser());
 
             $this->addFlash(
                 'success',
