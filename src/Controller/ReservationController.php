@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use DateTime;
-use App\Entity\User;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\RestaurantRepository;
@@ -35,10 +34,15 @@ class ReservationController extends AbstractController
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class);
         $userData = $userRepository->findBy(['id' => $this->getUser()]);
-        $pepolePref = $userData[0]->getPeoplePref();
-        $form->get('nb_people')->setData($pepolePref);
 
+        //------------------- Pre-fill user preference if connected ----------------
 
+        if ($this->getUser()) {
+            $pepolePref = $userData[0]->getPeoplePref();
+            $form->get('nb_people')->setData($pepolePref);
+        } else {
+            $form->get('nb_people')->setData('1');
+        }
 
         $form->handleRequest($request);
 
