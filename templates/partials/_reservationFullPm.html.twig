@@ -6,7 +6,7 @@
 
 	{% for reservation in availableDateAm %}
 		<li class="mx-1 my-1">
-			<a class="btn btn-outline-secondary lexend" id="timeBtn">{{ reservation | date("H:i")}}</a>
+			<a class="btn btn-outline-secondary lexend time-btn">{{ reservation | date("H:i")}}</a>
 		</li>
 	{% endfor %}
 

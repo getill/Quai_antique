@@ -9,7 +9,7 @@
 	{% for reservation in availableDatePm %}
 
 		<li class="mx-1 mt-1 my-1">
-			<a class="btn btn-dark lexend" id="timeBtn">{{ reservation | date("H:i")}}</a>
+			<a class="btn btn-dark lexend time-btn">{{ reservation | date("H:i")}}</a>
 		</li>
 
 	{% endfor %}
