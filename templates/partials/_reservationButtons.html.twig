@@ -45,7 +45,7 @@
 
 		{% for reservation in availableDateAm %}
 			<li class="mx-1 my-1">
-				<a class="btn btn-outline-secondary lexend time-btn">{{ reservation | date("H:i")}}</a>
+				<a class="btn {{ selectedTime is same as(reservation|date("H:i")) ? 'btn-secondary' : 'btn-outline-secondary' }} lexend time-btn">{{ reservation | date("H:i")}}</a>
 			</li>
 		{% endfor %}
 
@@ -59,7 +59,7 @@
 		{% for reservation in availableDatePm %}
 
 			<li class="mx-1 mt-1 my-1">
-				<a class="btn btn-dark lexend time-btn">{{ reservation | date("H:i")}}</a>
+				<a class="btn {{ selectedTime is same as(reservation|date("H:i")) ? 'btn-secondary' : 'btn-dark' }} lexend time-btn">{{ reservation | date("H:i")}}</a>
 			</li>
 
 		{% endfor %}
@@ -72,33 +72,3 @@
 	{#  #}
 
 {% endif %}
-
-{# {% block javascripts %}
-	<script>
-
-		function attachButtonClickHandlers() { // Récupérer tous les boutons avec l'ID "timeBtn"
-const buttons = document.querySelectorAll(".time-btn");
-
-// Vérifier si les boutons ont déjà été cliqués précédemment
-buttons.forEach((button) => {
-const isButtonClicked = localStorage.getItem(button.id);
-
-if (isButtonClicked) {
-button.classList.add("active");
-}
-
-// Ajouter un gestionnaire d'événement pour chaque bouton
-button.addEventListener("click", () => { // Ajouter ou supprimer la classe "active" au bouton cliqué
-button.classList.toggle("active");
-
-// Mettre à jour le statut du bouton cliqué dans le stockage local
-const isActive = button.classList.contains("active");
-localStorage.setItem(button.id, isActive ? "clicked" : "");
-});
-});
-}
-
-// Appeler la fonction pour attacher les gestionnaires d'événements aux boutons existants
-attachButtonClickHandlers();
-	</script>
-{% endblock %} #}

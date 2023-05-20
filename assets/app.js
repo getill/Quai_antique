@@ -220,35 +220,3 @@ $("#content").on("click", ".time-btn", (e) => {
     })
     .catch((e) => alert(e));
 });
-
-function attachButtonClickHandlers() {
-  // Récupérer tous les boutons avec l'ID "timeBtn"
-  const buttons = document.querySelectorAll(".time-btn");
-
-  // Vérifier si les boutons ont déjà été cliqués précédemment
-  buttons.forEach((button) => {
-    const isButtonClicked = localStorage.getItem(button.id);
-
-    if (isButtonClicked) {
-      button.classList.add("active");
-    }
-
-    // Ajouter un gestionnaire d'événement pour chaque bouton
-    button.addEventListener("click", () => {
-      // Ajouter ou supprimer la classe "active" au bouton cliqué
-      button.classList.toggle("active");
-
-      // Mettre à jour le statut du bouton cliqué dans le stockage local
-      const isActive = button.classList.contains("active");
-      localStorage.setItem(button.id, isActive ? "clicked" : "");
-    });
-  });
-}
-
-// Appeler la fonction pour attacher les gestionnaires d'événements aux boutons existants
-
-document.body.onClick(function (event) {
-  return event.target.classList.contains("active")
-    ? true
-    : attachButtonClickHandlers();
-});
