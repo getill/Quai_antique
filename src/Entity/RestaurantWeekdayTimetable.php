@@ -29,7 +29,7 @@ class RestaurantWeekdayTimetable
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?RestaurantWeekday $weekday_id = null;
+    private ?RestaurantWeekday $weekday = null;
 
     #[ORM\Column]
     private ?bool $isClosed = null;
@@ -89,16 +89,16 @@ class RestaurantWeekdayTimetable
 
     public function getNameWeekday(): ?string
     {
-        return $this->weekday_id->getName();
+        return $this->weekday->getName();
     }
     public function getIdWeekday(): ?RestaurantWeekday
     {
-        return $this->weekday_id;
+        return $this->weekday;
     }
 
     public function setIdWeekday(RestaurantWeekday $weekday_id): self
     {
-        $this->weekday_id = $weekday_id;
+        $this->weekday = $weekday_id;
 
         return $this;
     }

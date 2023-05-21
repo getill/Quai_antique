@@ -61,7 +61,8 @@ class ReservationController extends AbstractController
 
         //------------------------ Max people logic --------------------------------
 
-        $maxPeople = $restaurantRepository->find(3)->getMaxPeople();
+        $restaurantArray = $restaurantRepository->findAll();
+        $maxPeople = $restaurantArray[0]->getMaxPeople();
 
         $bookedTime = $reservationrepository->findAll();
 
