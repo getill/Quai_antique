@@ -19,7 +19,7 @@ class ReservationType extends AbstractType
         $builder
             ->add('nb_people', IntegerType::class, [
                 'row_attr' => [
-                    'class' => 'form-floating my-5',
+                    'class' => 'form-floating mb-5',
                 ],
                 'attr' => [
                     'placeholder' => 'Nombre de convives',

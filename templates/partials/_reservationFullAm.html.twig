@@ -9,7 +9,7 @@
 	{% for reservation in availableDatePm %}
 
 		<li class="mx-1 mt-1 my-1">
-				<a class="btn {{ selectedTime is same as(reservation|date("H:i")) ? 'btn-secondary' : 'btn-dark' }} lexend time-btn">{{ reservation | date("H:i")}}</a>
+				<a class="btn {{ selectedTime is same as(reservation|date("H:i")) ? 'btn-secondary' : 'btn-outline-secondary' }} lexend time-btn">{{ reservation | date("H:i")}}</a>
 		</li>
 
 	{% endfor %}
