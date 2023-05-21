@@ -41,7 +41,17 @@
 				</div>
 			</div>
 		</div>
-
+				<div class="row g-2 mb-5">
+			<div class="col-md">
+					{{ form_row(form.firstname) }}
+</div>
+			<div class="col-md">
+					{{ form_row(form.secondname) }}
+</div>
+</div>
+				<div class="row g-2 mb-5">
+					{{ form_row(form.email) }}
+</div>
 		<div id="content">
 			{% include "partials/_reservationButtons.html.twig" %}
 		</div>

@@ -39,7 +39,13 @@ class ReservationController extends AbstractController
 
         if ($this->getUser()) {
             $pepolePref = $userData[0]->getPeoplePref();
+            $firstName = $userData[0]->getFirstName();
+            $secondName = $userData[0]->getSecondName();
+            $email = $userData[0]->getEmail();
             $form->get('nb_people')->setData($pepolePref);
+            $form->get('firstname')->setData($firstName);
+            $form->get('secondname')->setData($secondName);
+            $form->get('email')->setData($email);
         } else {
             $form->get('nb_people')->setData('1');
         }

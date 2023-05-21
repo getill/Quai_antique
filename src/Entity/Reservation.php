@@ -6,6 +6,8 @@ use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -23,6 +25,20 @@ class Reservation
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?User $user = null;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank()]
+    private ?string $secondName = null;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank()]
+    // #[Assert\Regex('/\d/')]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Email()]
+    private ?string $email = null;
 
     public function getId(): ?int
     {
@@ -61,6 +77,42 @@ class Reservation
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSecondName(): ?string
+    {
+        return $this->secondName;
+    }
+
+    public function setSecondName(string $secondName): self
+    {
+        $this->secondName = $secondName;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

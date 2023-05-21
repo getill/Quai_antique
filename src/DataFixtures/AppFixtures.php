@@ -184,7 +184,10 @@ class AppFixtures extends Fixture
             $reservation = new Reservation();
             $reservation->setNbPeople(mt_rand(0, 13))
                 ->setDateTime($this->faker->dateTimeBetween('+1 week ', '+2 weeks'))
-                ->setUser($users[mt_rand(0, count($users) - 1)]);
+                ->setUser($users[mt_rand(0, count($users) - 1)])
+                ->setFirstName($this->faker->name())
+                ->setSecondName($this->faker->lastName())
+                ->setEmail($this->faker->email());
 
 
             $manager->persist($reservation);
