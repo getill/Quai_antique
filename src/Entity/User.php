@@ -26,11 +26,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 50)]
+    #[Assert\Regex('/^[a-z ,.\'-]+$/i')]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 50)]
+    #[Assert\Regex('/^[a-z ,.\'-]+$/i')]
     private ?string $second_name = null;
 
     #[ORM\Column(length: 180, unique: true)]

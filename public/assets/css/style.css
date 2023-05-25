@@ -28,9 +28,15 @@ p{
   font-family: 'Arvo', sans-serif;
 }
 
+
 header, nav {
   background: rgb(20,20,20) !important;
   background: linear-gradient(180deg, rgba(20,20,20,1) 10%, rgba(0,212,255,0) 100%) !important;
+}
+
+.menu {
+  font-family: 'Arvo', sans-serif;
+  list-style: none;
 }
 
 .img{

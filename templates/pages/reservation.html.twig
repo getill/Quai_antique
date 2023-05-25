@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block body %}
+
 	<h1 class="text-center text-white my-5 pt-5">Réservation</h1>
 
 	<div class="d-flex flex-column align-items-center justify-content-center container bg-light text-black rounded my-5 w-75">
@@ -25,6 +26,7 @@
 			<div class="col-md">
 				{{ form_row(form.firstname) }}
 			</div>
+{{ form_errors(form.firstname) }}
 
 			<div class="col-md">
 					{{ form_row(form.secondname) }}
