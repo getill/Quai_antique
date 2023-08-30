@@ -76,13 +76,17 @@ class ReservationController extends AbstractController
             $bookedTime,
             function ($obj) use ($date) {
                 $reservationDateTime = $obj->getDateTime(); // Take DateTime of every reservation
-                $reservationTime = $reservationDateTime->format('H:i'); // convert to string with date format to "time only"
+                $reservationTime = $reservationDateTime->format('H:i'); // convert to string with 
+                //date format to "time only"
                 if ($reservationTime <= "16:00") { // Takes every reservation below 16:00 (4pm)
-                    $stringDate = $reservationDateTime->format('n/d/Y'); // convert to string with date format to "date only"
+                    $stringDate = $reservationDateTime->format('n/j/Y'); // convert to string with 
+                    // dd($date, $stringDate);
+                    //date format to "date only"
                     return $stringDate == $date; // Filter date based on selected date
                 }
             }
         );
+        // dd($filtered_arrAM);
 
         $filtered_arrPM = array_filter(
             $bookedTime,
@@ -90,13 +94,13 @@ class ReservationController extends AbstractController
                 $reservationDateTime = $obj->getDateTime();
                 $reservationTime = $reservationDateTime->format('H:i');
                 if ($reservationTime >= "16:00") { // Takes every reservation after 16:00 (4pm)
-                    $stringDate = $reservationDateTime->format('n/d/Y');
+                    $stringDate = $reservationDateTime->format('n/j/Y');
                     return $stringDate == $date;
                 }
             }
         );
-        // dd($filtered_arrPM);
 
+        // dd($filtered_arrAM, $filtered_arrPM, $bookedTime);
         foreach ($filtered_arrAM as &$value) {
             $value = $value->getNbPeople();
         } // Get nbPeople of every morning reservation
@@ -106,6 +110,7 @@ class ReservationController extends AbstractController
 
         $sumAM = array_sum($filtered_arrAM); // Sum of every nbPeople AM
         $sumPM = array_sum($filtered_arrPM); // Sum of every nbPeople PM
+
 
         unset($value);
 
@@ -170,7 +175,6 @@ class ReservationController extends AbstractController
             }
             $openPm += $fifteen_mins;
         }
-
         //-------------- Display Logic -----------------------
 
         $resultAm = null;
@@ -194,6 +198,7 @@ class ReservationController extends AbstractController
             $resultPm = array_diff($createdTimePm, $bookedTime);
         }
         unset($value);
+        // dd($resultAm, $resultPm, $sumAM, $sumPM);
 
         //--------------- AJAX request verification -----------------------------
 
