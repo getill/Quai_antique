@@ -18,7 +18,10 @@
 				{% else %}
 					<p class="text-center mt-3">
 						Réservation pour
-						{{ form.nb_people.vars.value }}
+						{# {{ form.nb_people.vars.value }}
+						<pre>
+							{{ dump(form.nb_people.vars.value) }}
+						</pre> #}
 						le
 						{{ date | date("d/m/Y") }}
 						à

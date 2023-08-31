@@ -80,13 +80,12 @@ class ReservationController extends AbstractController
                 //date format to "time only"
                 if ($reservationTime <= "16:00") { // Takes every reservation below 16:00 (4pm)
                     $stringDate = $reservationDateTime->format('n/j/Y'); // convert to string with 
-                    // dd($date, $stringDate);
                     //date format to "date only"
                     return $stringDate == $date; // Filter date based on selected date
                 }
             }
         );
-        // dd($filtered_arrAM);
+
 
         $filtered_arrPM = array_filter(
             $bookedTime,
@@ -100,7 +99,6 @@ class ReservationController extends AbstractController
             }
         );
 
-        // dd($filtered_arrAM, $filtered_arrPM, $bookedTime);
         foreach ($filtered_arrAM as &$value) {
             $value = $value->getNbPeople();
         } // Get nbPeople of every morning reservation
@@ -198,7 +196,6 @@ class ReservationController extends AbstractController
             $resultPm = array_diff($createdTimePm, $bookedTime);
         }
         unset($value);
-        // dd($resultAm, $resultPm, $sumAM, $sumPM);
 
         //--------------- AJAX request verification -----------------------------
 

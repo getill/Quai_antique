@@ -21,6 +21,7 @@ security:
         check_path: security.login
       login_throttling:
         max_attempts: 3
+        interval: "15 minutes"
       logout:
         path: security.logout
 
