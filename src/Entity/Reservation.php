@@ -28,12 +28,10 @@ class Reservation
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank()]
-    #[Assert\Regex('/^[a-z ,.\'-]+$/i')]
     private ?string $secondName = null;
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank()]
-    #[Assert\Regex('/^[a-z ,.\'-]+$/i')]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]

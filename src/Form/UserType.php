@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -32,7 +33,11 @@ class UserType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Length(['min' => 2, 'max' => 50])
+                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Regex([
+                        'pattern' => '/^[A-Za-zÀ-ÖØ-öø-ÿ -]*$/u',
+                        'message' => 'Veuillez entrer un prénom valide'
+                    ]),
                 ]
             ])
 
@@ -52,7 +57,11 @@ class UserType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Length(['min' => 2, 'max' => 50])
+                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Regex([
+                        'pattern' => '/^[A-Za-zÀ-ÖØ-öø-ÿ -]*$/u',
+                        'message' => 'Veuillez entrer un nom valide'
+                    ]),
                 ]
             ])
 

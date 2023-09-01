@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -43,6 +44,12 @@ class ReservationType extends AbstractType
                 'label' => 'Prénom',
                 'label_attr' => [
                     'class' => 'form-label'
+                ],
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[A-Za-zÀ-ÖØ-öø-ÿ -]*$/u',
+                        'message' => 'Veuillez entrer un prénom valide'
+                    ]),
                 ]
             ])
             ->add('secondname', TextType::class, [
@@ -56,6 +63,12 @@ class ReservationType extends AbstractType
                 'label' => 'Nom',
                 'label_attr' => [
                     'class' => 'form-label'
+                ],
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[A-Za-zÀ-ÖØ-öø-ÿ -]*$/u',
+                        'message' => 'Veuillez entrer un nom valide'
+                    ]),
                 ]
             ])
             ->add('email', TextType::class, [
