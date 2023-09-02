@@ -26,6 +26,11 @@ class MenuCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $imageField = ImageField::new('img')->setUploadDir('public/assets/img/dishes')->setBasePath('/assets/img/dishes');
+        if ($pageName != 'new') {
+            $imageField->setRequired(false);
+        }
+
         return [
             TextField::new('name'),
             TextField::new('description')->setFormTypeOptions([
@@ -40,10 +45,7 @@ class MenuCrudController extends AbstractCrudController
             ]),
             BooleanField::new('selected'),
             TextField::new('img_title')->onlyOnForms(),
-            ImageField::new('img')
-                ->setBasePath('/assets/img/dishes')
-                ->setRequired(true)
-                ->setUploadDir('public/assets/img/dishes'),
+            $imageField,
             AssociationField::new('category')
         ];
     }
