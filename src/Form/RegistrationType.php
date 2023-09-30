@@ -104,7 +104,18 @@ class RegistrationType extends AbstractType
                     'label' => 'Mot de passe',
                     'label_attr' => [
                         'class' => 'form-label'
-                    ]
+                    ],
+                    'constraints' => [
+                        new Assert\NotBlank(),
+                        new Regex([
+                            'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/u',
+                            'message' => 'Veuillez entrer 7 caractères dont un spécial, un chiffre, une minuscule et une majuscule'
+                        ]),
+                    ],
+                    'toggle' => true,
+                    'use_toggle_form_theme' => false,
+                    'hidden_label' => 'Masquer',
+                    'visible_label' => 'Afficher',
                 ],
                 'second_options' => [
                     'row_attr' => [
